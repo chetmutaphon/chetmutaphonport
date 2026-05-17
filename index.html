@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chet Mutaphon — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --font-body: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --font-heading: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --heading-weight: 700;
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #1d1d1f;
+      --border: #d2d2d7;
+      --card: #f5f5f7;
+      --nav-bg: rgba(255,255,255,0.72);
+      --radius: 18px;
+      --hero-size: clamp(48px, 8vw, 88px);
+      --hero-align: center;
+      --hero-items: center;
+      --section-gap: 120px;
+      --gallery-cols: 3;
+    }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* SCROLL PROGRESS */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; z-index: 1002;
+      height: 2px; background: var(--accent);
+      transition: width 0.05s linear;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 56px; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 48px;
+      background: transparent; border-bottom: 1px solid transparent;
+      transition: all 0.35s ease;
+    }
+    .nav--scrolled {
+      background: var(--nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-heading); font-weight: var(--heading-weight);
+      font-size: 17px; color: var(--text); cursor: pointer;
+      letter-spacing: -0.02em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-link {
+      font-size: 14px; color: var(--text-secondary); cursor: pointer;
+      text-decoration: none; font-weight: 400; letter-spacing: 0.01em;
+      transition: color 0.25s ease; position: relative;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link--active { color: var(--text); font-weight: 600; }
+    .nav-link--active::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1.5px; background: var(--accent); border-radius: 1px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: var(--hero-items, center); justify-content: center;
+      padding: 80px 48px 40px; position: relative;
+    }
+    .hero-content { text-align: var(--hero-align, center); max-width: 900px; }
+    .hero-name {
+      font-family: var(--font-heading); font-weight: var(--heading-weight);
+      font-size: var(--hero-size); letter-spacing: -0.04em;
+      line-height: 1.05; color: var(--text);
+    }
+    .hero-title {
+      font-size: clamp(16px, 2vw, 22px); color: var(--text-secondary);
+      margin-top: 16px; font-weight: 400; letter-spacing: -0.01em;
+    }
+    .hero-tagline {
+      font-size: clamp(14px, 1.4vw, 17px); color: var(--text-secondary);
+      margin: 12px auto 0; opacity: 0.7; max-width: 500px; line-height: 1.6;
+    }
+    .scroll-hint {
+      position: absolute; bottom: 32px;
+      left: 50%; transform: translateX(-50%);
+    }
+    .scroll-hint-line {
+      width: 1px; height: 48px; position: relative; overflow: hidden;
+      background: var(--border);
+    }
+    .scroll-hint-line::after {
+      content: ''; position: absolute; top: -48px; left: 0;
+      width: 1px; height: 48px; background: var(--accent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(96px); }
+    }
+
+    /* SECTIONS */
+    .section { padding: var(--section-gap) 0; transition: background 0.5s ease; }
+    .section--alt { background: var(--bg-alt); }
+    .section-inner { max-width: 1120px; margin: 0 auto; padding: 0 48px; }
+    .section-label {
+      font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent); margin-bottom: 12px; font-weight: 600;
+      transition: color 0.5s ease;
+    }
+    .section-title {
+      font-family: var(--font-heading); font-weight: var(--heading-weight);
+      font-size: clamp(32px, 4vw, 52px); letter-spacing: -0.03em;
+      line-height: 1.15; color: var(--text); margin-bottom: 48px;
+      transition: color 0.5s ease;
+    }
+
+    /* ABOUT */
+    .about-text {
+      font-size: 18px; line-height: 1.75; color: var(--text-secondary);
+      max-width: 680px; margin-bottom: 48px; transition: color 0.5s ease;
+    }
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag {
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 14px; font-weight: 500;
+      border: 1px solid var(--border); color: var(--text); background: var(--bg);
+      transition: all 0.3s ease; cursor: default;
+    }
+    .skill-tag:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 40px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 5px; top: 8px; bottom: 40px;
+      width: 1.5px; background: var(--border); transition: background 0.5s ease;
+    }
+    .timeline-item { position: relative; padding-bottom: 40px; }
+    .timeline-dot {
+      position: absolute; left: -40px; top: 8px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent); z-index: 1;
+      transition: all 0.5s ease;
+    }
+    .timeline-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 28px 32px; transition: transform 0.4s ease, background 0.5s ease;
+    }
+    .timeline-card:hover { transform: translateX(4px); }
+    .timeline-header {
+      display: flex; justify-content: space-between;
+      align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;
+    }
+    .timeline-role {
+      font-family: var(--font-heading); font-weight: var(--heading-weight);
+      font-size: 18px; color: var(--text); transition: color 0.5s ease;
+    }
+    .timeline-period {
+      font-size: 13px; color: var(--text-secondary); font-weight: 500;
+      letter-spacing: 0.02em; transition: color 0.5s ease;
+    }
+    .timeline-company {
+      font-size: 14px; color: var(--accent); margin-bottom: 10px;
+      font-weight: 500; transition: color 0.5s ease;
+    }
+    .timeline-desc {
+      font-size: 15px; line-height: 1.65; color: var(--text-secondary);
+      transition: color 0.5s ease;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--gallery-cols, 3), 1fr);
+      gap: 20px;
+    }
+    .gallery-card {
+      position: relative; border-radius: var(--radius);
+      overflow: hidden; cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-radius 0.5s ease;
+    }
+    .gallery-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+    .gallery-placeholder {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .placeholder-label {
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+      font-size: 11px; letter-spacing: 0.15em; color: var(--text-secondary);
+      font-weight: 500; transition: color 0.5s ease;
+    }
+    .placeholder-hint {
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+      font-size: 10px; color: var(--text-secondary); opacity: 0.5;
+      transition: color 0.5s ease;
+    }
+    .gallery-overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0);
+      display: flex; align-items: flex-end; padding: 20px;
+      transition: background 0.35s ease;
+    }
+    .gallery-card:hover .gallery-overlay { background: rgba(0,0,0,0.5); }
+    .gallery-overlay-title {
+      color: #fff; font-weight: 600; font-size: 15px;
+      opacity: 0; transform: translateY(8px); transition: all 0.35s ease;
+    }
+    .gallery-card:hover .gallery-overlay-title { opacity: 1; transform: translateY(0); }
+
+    /* VIDEO */
+    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .video-card {
+      cursor: pointer; border-radius: var(--radius); overflow: hidden;
+      background: var(--card); transition: all 0.4s ease;
+    }
+    .video-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+    .video-thumb {
+      aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+      background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(0,0,0,0.03) 12px, rgba(0,0,0,0.03) 24px), var(--card);
+      transition: background 0.5s ease;
+    }
+    .video-play { color: var(--text); opacity: 0.3; transition: all 0.35s ease; }
+    .video-card:hover .video-play { opacity: 0.8; transform: scale(1.08); }
+    .video-info { padding: 16px 20px; }
+    .video-title {
+      font-family: var(--font-heading); font-weight: 600;
+      font-size: 15px; color: var(--text); margin-bottom: 4px;
+      transition: color 0.5s ease;
+    }
+    .video-desc { font-size: 13px; color: var(--text-secondary); transition: color 0.5s ease; }
+
+    /* MODALS */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeIn 0.3s ease; cursor: zoom-out; padding: 48px;
+    }
+    .modal-overlay--dark { background: rgba(0,0,0,0.95); }
+    .modal-close {
+      position: fixed; top: 20px; right: 24px; width: 40px; height: 40px;
+      border-radius: 50%; background: rgba(255,255,255,0.1); border: none;
+      color: #fff; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease; z-index: 2001;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-content { max-width: 800px; width: 100%; animation: scaleIn 0.3s ease; cursor: default; }
+    .lightbox-image {
+      border-radius: 12px; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .lightbox-info { padding: 20px 0; }
+    .lightbox-title {
+      color: #fff; font-family: var(--font-heading);
+      font-weight: var(--heading-weight); font-size: 20px;
+    }
+    .video-modal { width: 100%; max-width: 960px; cursor: default; animation: scaleIn 0.3s ease; }
+    .video-embed { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #000; }
+    .video-modal-title { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 16px; text-align: center; }
+
+    /* THEME SWITCHER */
+    .theme-switcher {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+    }
+    .theme-btn {
+      padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 500;
+      border: 1px solid var(--border); background: var(--nav-bg);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      color: var(--text); cursor: pointer; transition: all 0.25s ease;
+      white-space: nowrap; font-family: var(--font-body);
+    }
+    .theme-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .theme-btn--active { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.25s ease; color: var(--text);
+    }
+    .theme-toggle:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .theme-menu {
+      display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* FOOTER */
+    .footer { padding: 60px 0; border-top: 1px solid var(--border); transition: border-color 0.5s ease; }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 48px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 4px; }
+    .footer-name {
+      font-family: var(--font-heading); font-weight: var(--heading-weight);
+      font-size: 16px; color: var(--text); transition: color 0.5s ease;
+    }
+    .footer-copy { font-size: 13px; color: var(--text-secondary); transition: color 0.5s ease; }
+    .footer-contact { display: flex; gap: 32px; flex-wrap: wrap; }
+    .footer-link {
+      font-size: 14px; color: var(--text-secondary); text-decoration: none;
+      transition: color 0.25s ease; display: inline-flex; align-items: center;
+    }
+    .footer-link:hover { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav { padding: 0 24px; }
+      .nav-links { gap: 20px; }
+      .hero { padding: 80px 24px 40px; }
+      .section-inner { padding: 0 24px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+      .video-grid { grid-template-columns: 1fr; }
+      .timeline { padding-left: 28px; }
+      .timeline-dot { left: -28px; }
+      .timeline-card { padding: 20px; }
+      .footer-inner { padding: 0 24px; }
+      .theme-switcher { bottom: 16px; right: 16px; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr !important; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // ── DATA ──────────────────────────────────────────────────────────────────
+
+    const THEMES = {
+      appleMinimal: {
+        name: 'Apple Minimal',
+        vars: {
+          '--font-body': '-apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+          '--font-heading': '-apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+          '--heading-weight': '700',
+          '--bg': '#ffffff', '--bg-alt': '#f5f5f7', '--text': '#1d1d1f',
+          '--text-secondary': '#86868b', '--accent': '#1d1d1f', '--border': '#d2d2d7',
+          '--card': '#f5f5f7', '--nav-bg': 'rgba(255,255,255,0.72)',
+          '--radius': '18px', '--hero-size': 'clamp(48px, 8vw, 88px)',
+          '--hero-align': 'center', '--hero-items': 'center',
+          '--section-gap': '120px', '--gallery-cols': '3',
+        },
+      },
+      warmEditorial: {
+        name: 'Warm Editorial',
+        vars: {
+          '--font-body': '"DM Sans", sans-serif',
+          '--font-heading': '"DM Serif Display", serif',
+          '--heading-weight': '400',
+          '--bg': '#faf8f5', '--bg-alt': '#f0ece4', '--text': '#2c2825',
+          '--text-secondary': '#8a8279', '--accent': '#8a7054', '--border': '#e0dbd3',
+          '--card': '#f0ece4', '--nav-bg': 'rgba(250,248,245,0.85)',
+          '--radius': '8px', '--hero-size': 'clamp(44px, 7vw, 76px)',
+          '--hero-align': 'left', '--hero-items': 'flex-start',
+          '--section-gap': '100px', '--gallery-cols': '3',
+        },
+      },
+      coolStudio: {
+        name: 'Cool Studio',
+        vars: {
+          '--font-body': '"Space Grotesk", sans-serif',
+          '--font-heading': '"Space Grotesk", sans-serif',
+          '--heading-weight': '600',
+          '--bg': '#f5f7fa', '--bg-alt': '#e8ecf2', '--text': '#1a1e2e',
+          '--text-secondary': '#6b7280', '--accent': '#4361ee', '--border': '#d5dbe5',
+          '--card': '#e8ecf2', '--nav-bg': 'rgba(245,247,250,0.82)',
+          '--radius': '14px', '--hero-size': 'clamp(44px, 7vw, 72px)',
+          '--hero-align': 'center', '--hero-items': 'center',
+          '--section-gap': '100px', '--gallery-cols': '4',
+        },
+      },
+      inkPaper: {
+        name: 'Ink & Paper',
+        vars: {
+          '--font-body': '"Syne", sans-serif',
+          '--font-heading': '"Syne", sans-serif',
+          '--heading-weight': '800',
+          '--bg': '#ffffff', '--bg-alt': '#f0f0f0', '--text': '#000000',
+          '--text-secondary': '#555555', '--accent': '#000000', '--border': '#e0e0e0',
+          '--card': '#f0f0f0', '--nav-bg': 'rgba(255,255,255,0.92)',
+          '--radius': '0px', '--hero-size': 'clamp(52px, 9vw, 100px)',
+          '--hero-align': 'left', '--hero-items': 'flex-start',
+          '--section-gap': '140px', '--gallery-cols': '3',
+        },
+      },
+    };
+
+    function applyTheme(key) {
+      const t = THEMES[key];
+      if (!t) return;
+      Object.entries(t.vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+    }
+
+    const SKILLS = [
+      'Graphic Design', 'Photography', 'Videography', 'Marketing Strategy',
+      'Social Media Management', 'Adobe Creative Suite', 'Content Creation',
+      'Brand Development', 'Art Direction', 'Motion Graphics', 'Print Design', 'Analytics',
+    ];
+
+    const EXPERIENCES = [
+      {
+        role: 'Marketing Executive',
+        company: 'Apex Creative Group',
+        period: '2023 — Present',
+        desc: 'Lead integrated marketing campaigns and brand strategy across digital and print channels. Oversee social media presence, content creation pipelines, and performance analytics for a portfolio of 12+ clients.',
+      },
+      {
+        role: 'Senior Graphic Designer',
+        company: 'Studio Craft',
+        period: '2021 — 2023',
+        desc: 'Created visual identities, editorial layouts, and marketing materials for regional brands. Art directed photoshoots and video productions, and built a design system used across all client deliverables.',
+      },
+      {
+        role: 'Marketing Coordinator',
+        company: 'Bold Agency',
+        period: '2019 — 2021',
+        desc: 'Coordinated cross-channel campaigns, analyzed performance metrics, and produced creative content for social media and print. Supported pitch presentations and managed vendor relationships.',
+      },
+      {
+        role: 'Junior Designer',
+        company: 'Form & Function',
+        period: '2017 — 2019',
+        desc: 'Designed marketing collateral, social media graphics, and packaging mock-ups. Supported senior designers on brand identity projects and contributed to client presentations.',
+      },
+    ];
+
+    const ARTWORK_ITEMS = [
+      { id: 'a1', title: 'Brand Identity System', label: 'BRAND IDENTITY', hue: 260 },
+      { id: 'a2', title: 'Event Poster Series', label: 'POSTER DESIGN', hue: 280 },
+      { id: 'a3', title: 'Editorial Layout', label: 'EDITORIAL', hue: 240 },
+      { id: 'a4', title: 'Annual Report Design', label: 'REPORT', hue: 220 },
+      { id: 'a5', title: 'Packaging Design', label: 'PACKAGING', hue: 300 },
+      { id: 'a6', title: 'Social Media Templates', label: 'SOCIAL KIT', hue: 250 },
+    ];
+
+    const PHOTO_ITEMS = [
+      { id: 'p1', title: 'Urban Landscapes', label: 'URBAN', hue: 180 },
+      { id: 'p2', title: 'Product Photography', label: 'PRODUCT', hue: 160 },
+      { id: 'p3', title: 'Food Photography', label: 'FOOD', hue: 40 },
+      { id: 'p4', title: 'Portrait Series', label: 'PORTRAIT', hue: 20 },
+      { id: 'p5', title: 'Event Photography', label: 'EVENT', hue: 200 },
+      { id: 'p6', title: 'Architecture', label: 'ARCHITECTURE', hue: 190 },
+    ];
+
+    const VIDEO_ITEMS = [
+      { id: 'v1', title: 'Brand Story', desc: 'Company brand narrative video', vimeoId: '76979871' },
+      { id: 'v2', title: 'Product Launch', desc: 'New product reveal campaign', vimeoId: '137857207' },
+      { id: 'v3', title: 'Behind the Scenes', desc: 'Creative process documentary', vimeoId: '169599296' },
+      { id: 'v4', title: 'Event Highlight', desc: 'Corporate event recap', vimeoId: '174316908' },
+      { id: 'v5', title: 'Social Reel', desc: 'Short-form social content', vimeoId: '259411563' },
+      { id: 'v6', title: 'Client Testimonial', desc: 'Customer success story', vimeoId: '347119375' },
+    ];
+
+    const DASHBOARD_ITEMS = [
+      { id: 'd1', title: 'Social Media Analytics', label: 'SOCIAL ANALYTICS', hue: 210 },
+      { id: 'd2', title: 'Campaign Performance', label: 'CAMPAIGN KPI', hue: 150 },
+      { id: 'd3', title: 'Content Calendar', label: 'CONTENT PLAN', hue: 30 },
+      { id: 'd4', title: 'Engagement Metrics', label: 'ENGAGEMENT', hue: 340 },
+      { id: 'd5', title: 'ROI Dashboard', label: 'ROI REPORT', hue: 120 },
+      { id: 'd6', title: 'Monthly Performance', label: 'MONTHLY REVIEW', hue: 270 },
+    ];
+
+    // ── HOOKS ─────────────────────────────────────────────────────────────────
+
+    function useScrollReveal(threshold = 0.08) {
+      const ref = React.useRef(null);
+      const [visible, setVisible] = React.useState(false);
+      React.useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const obs = new IntersectionObserver(
+          ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.unobserve(el); } },
+          { threshold, rootMargin: '0px 0px -40px 0px' }
+        );
+        obs.observe(el);
+        return () => obs.disconnect();
+      }, []);
+      return [ref, visible];
+    }
+
+    function ScrollReveal({ children, delay = 0, className = '', style = {} }) {
+      const [ref, visible] = useScrollReveal();
+      return (
+        <div ref={ref} className={className} style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(36px)',
+          transition: `opacity 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
+          willChange: 'opacity, transform', ...style,
+        }}>
+          {children}
+        </div>
+      );
+    }
+
+    function useActiveSection(ids) {
+      const [active, setActive] = React.useState('');
+      React.useEffect(() => {
+        const observers = ids.map(id => {
+          const el = document.getElementById(id);
+          if (!el) return null;
+          const obs = new IntersectionObserver(
+            ([e]) => { if (e.isIntersecting) setActive(id); },
+            { threshold: 0.25, rootMargin: '-80px 0px -40% 0px' }
+          );
+          obs.observe(el);
+          return obs;
+        });
+        return () => observers.forEach(o => o?.disconnect());
+      }, []);
+      return active;
+    }
+
+    // ── LOADING SCREEN ────────────────────────────────────────────────────────
+
+    function LoadingScreen({ onDone }) {
+      const [phase, setPhase] = React.useState(0);
+      React.useEffect(() => {
+        const t1 = setTimeout(() => setPhase(1), 100);
+        const t2 = setTimeout(() => setPhase(2), 1600);
+        const t3 = setTimeout(onDone, 2200);
+        return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+      }, []);
+      return (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999, background: 'var(--bg)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexDirection: 'column', gap: 16,
+          opacity: phase >= 2 ? 0 : 1,
+          transition: 'opacity 0.6s cubic-bezier(0.22,1,0.36,1)',
+          pointerEvents: phase >= 2 ? 'none' : 'auto',
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)',
+            fontSize: 56, color: 'var(--text)', letterSpacing: '-0.04em',
+            opacity: phase >= 1 ? 1 : 0,
+            transform: phase >= 1 ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1)',
+          }}>CM</div>
+          <div style={{
+            width: 48, height: 2, borderRadius: 1, background: 'var(--accent)',
+            opacity: phase >= 1 ? 0.4 : 0,
+            transform: phase >= 1 ? 'scaleX(1)' : 'scaleX(0)',
+            transition: 'all 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s',
+          }} />
+        </div>
+      );
+    }
+
+    // ── SCROLL PROGRESS ───────────────────────────────────────────────────────
+
+    function ScrollProgress() {
+      const [w, setW] = React.useState(0);
+      React.useEffect(() => {
+        const fn = () => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          setW(max > 0 ? (window.scrollY / max) * 100 : 0);
+        };
+        window.addEventListener('scroll', fn, { passive: true });
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+      return <div className="scroll-progress" style={{ width: `${w}%` }} />;
+    }
+
+    // ── NAVIGATION ────────────────────────────────────────────────────────────
+
+    function Navigation({ active }) {
+      const [scrolled, setScrolled] = React.useState(false);
+      React.useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 50);
+        window.addEventListener('scroll', fn, { passive: true });
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
+      const goTo = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const y = el.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      };
+
+      const links = [
+        { id: 'about', label: 'About' },
+        { id: 'experience', label: 'Experience' },
+        { id: 'artwork', label: 'Artwork' },
+        { id: 'photography', label: 'Photo' },
+        { id: 'videos', label: 'Video' },
+        { id: 'dashboard', label: 'Dashboard' },
+      ];
+
+      return (
+        <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+          <a className="nav-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            Chet Mutaphon
+          </a>
+          <div className="nav-links">
+            {links.map(l => (
+              <a key={l.id}
+                className={`nav-link ${active === l.id ? 'nav-link--active' : ''}`}
+                onClick={() => goTo(l.id)}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      );
+    }
+
+    // ── HERO ──────────────────────────────────────────────────────────────────
+
+    function HeroSection() {
+      const [show, setShow] = React.useState(false);
+      React.useEffect(() => { setTimeout(() => setShow(true), 300); }, []);
+      return (
+        <section className="hero" id="hero">
+          <div className="hero-content" style={{
+            opacity: show ? 1 : 0,
+            transform: show ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'all 0.9s cubic-bezier(0.22,1,0.36,1)',
+          }}>
+            <h1 className="hero-name">Chet Mutaphon</h1>
+            <p className="hero-title">Marketing Executive &amp; Graphic Designer</p>
+            <p className="hero-tagline">Crafting visual stories that connect brands with people.</p>
+          </div>
+          <div className="scroll-hint" style={{ opacity: show ? 1 : 0, transition: 'opacity 1.2s ease 0.8s' }}>
+            <div className="scroll-hint-line" />
+          </div>
+        </section>
+      );
+    }
+
+    // ── ABOUT & SKILLS ────────────────────────────────────────────────────────
+
+    function AboutSkillsSection() {
+      return (
+        <section className="section section--alt" id="about">
+          <div className="section-inner">
+            <ScrollReveal>
+              <p className="section-label">About</p>
+              <h2 className="section-title">A creative at the intersection<br />of design and marketing.</h2>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <p className="about-text">
+                With over 8 years of experience spanning graphic design, photography, videography, and marketing
+                strategy, I bring a multidisciplinary approach to every project. From crafting brand identities to
+                directing video content and analyzing campaign performance — I believe great design drives great results.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <div className="skills-grid">
+                {SKILLS.map((s, i) => <span key={i} className="skill-tag">{s}</span>)}
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      );
+    }
+
+    // ── EXPERIENCE ────────────────────────────────────────────────────────────
+
+    function ExperienceSection() {
+      return (
+        <section className="section" id="experience">
+          <div className="section-inner">
+            <ScrollReveal>
+              <p className="section-label">Experience</p>
+              <h2 className="section-title">Where I've worked.</h2>
+            </ScrollReveal>
+            <div className="timeline">
+              {EXPERIENCES.map((exp, i) => (
+                <ScrollReveal key={i} delay={i * 0.12}>
+                  <div className="timeline-item">
+                    <div className="timeline-dot" />
+                    <div className="timeline-card">
+                      <div className="timeline-header">
+                        <h3 className="timeline-role">{exp.role}</h3>
+                        <span className="timeline-period">{exp.period}</span>
+                      </div>
+                      <p className="timeline-company">{exp.company}</p>
+                      <p className="timeline-desc">{exp.desc}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ── PORTFOLIO GRID + LIGHTBOX ─────────────────────────────────────────────
+
+    function PortfolioGrid({ items, aspectRatio = '4/3' }) {
+      const [lightbox, setLightbox] = React.useState(null);
+      React.useEffect(() => {
+        if (!lightbox) return;
+        const fn = (e) => { if (e.key === 'Escape') setLightbox(null); };
+        window.addEventListener('keydown', fn);
+        return () => window.removeEventListener('keydown', fn);
+      }, [lightbox]);
+
+      return (
+        <>
+          <div className="gallery-grid">
+            {items.map((item, i) => (
+              <ScrollReveal key={item.id} delay={i * 0.08}>
+                <div className="gallery-card" onClick={() => setLightbox(item)}>
+                  <div className="gallery-placeholder" style={{
+                    aspectRatio,
+                    background: `repeating-linear-gradient(-45deg, transparent, transparent 10px, hsl(${item.hue}, 25%, 88%) 10px, hsl(${item.hue}, 25%, 88%) 20px), var(--card)`,
+                  }}>
+                    <span className="placeholder-label">{item.label}</span>
+                    <span className="placeholder-hint">drop image here</span>
+                  </div>
+                  <div className="gallery-overlay">
+                    <span className="gallery-overlay-title">{item.title}</span>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {lightbox && (
+            <div className="modal-overlay" onClick={() => setLightbox(null)}>
+              <button className="modal-close" onClick={() => setLightbox(null)}>✕</button>
+              <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+                <div className="lightbox-image" style={{
+                  aspectRatio,
+                  background: `repeating-linear-gradient(-45deg, transparent, transparent 14px, hsl(${lightbox.hue}, 25%, 86%) 14px, hsl(${lightbox.hue}, 25%, 86%) 28px), var(--card)`,
+                }}>
+                  <span className="placeholder-label" style={{ fontSize: 16 }}>{lightbox.label}</span>
+                  <span className="placeholder-hint">drop image here</span>
+                </div>
+                <div className="lightbox-info">
+                  <h3 className="lightbox-title">{lightbox.title}</h3>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      );
+    }
+
+    // ── ARTWORK ───────────────────────────────────────────────────────────────
+
+    function ArtworkSection() {
+      return (
+        <section className="section section--alt" id="artwork">
+          <div className="section-inner">
+            <ScrollReveal>
+              <p className="section-label">Artwork</p>
+              <h2 className="section-title">Design work.</h2>
+            </ScrollReveal>
+            <PortfolioGrid items={ARTWORK_ITEMS} />
+          </div>
+        </section>
+      );
+    }
+
+    // ── PHOTOGRAPHY ───────────────────────────────────────────────────────────
+
+    function PhotographySection() {
+      return (
+        <section className="section" id="photography">
+          <div className="section-inner">
+            <ScrollReveal>
+              <p className="section-label">Photography</p>
+              <h2 className="section-title">Through the lens.</h2>
+            </ScrollReveal>
+            <PortfolioGrid items={PHOTO_ITEMS} aspectRatio="3/2" />
+          </div>
+        </section>
+      );
+    }
+
+    // ── VIDEO ─────────────────────────────────────────────────────────────────
+
+    function VideoSection() {
+      const [modal, setModal] = React.useState(null);
+      React.useEffect(() => {
+        if (!modal) return;
+        const fn = (e) => { if (e.key === 'Escape') setModal(null); };
+        window.addEventListener('keydown', fn);
+        return () => window.removeEventListener('keydown', fn);
+      }, [modal]);
+
+      return (
+        <section className="section section--alt" id="videos">
+          <div className="section-inner">
+            <ScrollReveal>
+              <p className="section-label">Videographer</p>
+              <h2 className="section-title">Motion &amp; storytelling.</h2>
+            </ScrollReveal>
+            <div className="video-grid">
+              {VIDEO_ITEMS.map((v, i) => (
+                <ScrollReveal key={v.id} delay={i * 0.1}>
+                  <div className="video-card" onClick={() => setModal(v)}>
+                    <div className="video-thumb">
+                      <div className="video-play">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                          <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="2" opacity="0.8" />
+                          <path d="M20 16l12 8-12 8V16z" fill="currentColor" opacity="0.9" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="video-info">
+                      <h4 className="video-title">{v.title}</h4>
+                      <p className="video-desc">{v.desc}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {modal && (
+            <div className="modal-overlay modal-overlay--dark" onClick={() => setModal(null)}>
+              <button className="modal-close" onClick={() => setModal(null)}>✕</button>
+              <div className="video-modal" onClick={e => e.stopPropagation()}>
+                <div className="video-embed">
+                  <iframe
+                    src={`https://player.vimeo.com/video/${modal.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    style={{ width: '100%', height: '100%', border: 'none' }}
+                  />
+                </div>
+                <p className="video-modal-title">{modal.title}</p>
+              </div>
+            </div>
+          )}
+        </section>
+      );
+    }
+
+    // ── DASHBOARD ─────────────────────────────────────────────────────────────
+
+    function DashboardSection() {
+      return (
+        <section className="section" id="dashboard">
+          <div className="section-inner">
+            <ScrollReveal>
+              <p className="section-label">Marketing</p>
+              <h2 className="section-title">Dashboard &amp; analytics.</h2>
+            </ScrollReveal>
+            <PortfolioGrid items={DASHBOARD_ITEMS} aspectRatio="16/9" />
+          </div>
+        </section>
+      );
+    }
+
+    // ── FOOTER ────────────────────────────────────────────────────────────────
+
+    function FooterSection() {
+      return (
+        <footer className="footer">
+          <ScrollReveal>
+            <div className="footer-inner">
+              <div className="footer-left">
+                <span className="footer-name">Chet Mutaphon</span>
+                <span className="footer-copy">© 2026 All rights reserved.</span>
+              </div>
+              <div className="footer-contact">
+                <a href="mailto:hello@chetmutaphon.com" className="footer-link">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginRight: 6, verticalAlign: '-2px' }}>
+                    <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                    <path d="M1 5l7 4 7-4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  </svg>
+                  hello@chetmutaphon.com
+                </a>
+                <a href="https://linkedin.com/in/chetmutaphon" target="_blank" rel="noopener" className="footer-link">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style={{ marginRight: 6, verticalAlign: '-2px' }}>
+                    <path d="M13.6 1H2.4C1.63 1 1 1.63 1 2.4v11.2c0 .77.63 1.4 1.4 1.4h11.2c.77 0 1.4-.63 1.4-1.4V2.4c0-.77-.63-1.4-1.4-1.4zM5.3 13H3.2V6.5h2.1V13zM4.25 5.6c-.69 0-1.25-.56-1.25-1.25S3.56 3.1 4.25 3.1s1.25.56 1.25 1.25-.56 1.25-1.25 1.25zM13 13h-2.1V9.85c0-.75-.01-1.72-1.05-1.72-1.05 0-1.21.82-1.21 1.67V13H6.55V6.5h2.01v.89h.03c.28-.53.96-1.09 1.98-1.09 2.12 0 2.51 1.4 2.51 3.21V13z"/>
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </ScrollReveal>
+        </footer>
+      );
+    }
+
+    // ── THEME SWITCHER ────────────────────────────────────────────────────────
+
+    function ThemeSwitcher({ current, onChange }) {
+      const [open, setOpen] = React.useState(false);
+      return (
+        <div className="theme-switcher">
+          {open && (
+            <div className="theme-menu">
+              {Object.entries(THEMES).map(([key, t]) => (
+                <button key={key} className={`theme-btn ${current === key ? 'theme-btn--active' : ''}`}
+                  onClick={() => { onChange(key); setOpen(false); }}>
+                  {t.name}
+                </button>
+              ))}
+            </div>
+          )}
+          <button className="theme-toggle" onClick={() => setOpen(o => !o)} title="Switch theme">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+      );
+    }
+
+    // ── APP ───────────────────────────────────────────────────────────────────
+
+    function App() {
+      const [loaded, setLoaded] = React.useState(false);
+      const [theme, setTheme] = React.useState('appleMinimal');
+      const active = useActiveSection(['about', 'experience', 'artwork', 'photography', 'videos', 'dashboard']);
+
+      React.useEffect(() => { applyTheme('appleMinimal'); }, []);
+      React.useEffect(() => { applyTheme(theme); }, [theme]);
+
+      return (
+        <>
+          {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
+          <ScrollProgress />
+          <Navigation active={active} />
+          <HeroSection />
+          <AboutSkillsSection />
+          <ExperienceSection />
+          <ArtworkSection />
+          <PhotographySection />
+          <VideoSection />
+          <DashboardSection />
+          <FooterSection />
+          <ThemeSwitcher current={theme} onChange={setTheme} />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
