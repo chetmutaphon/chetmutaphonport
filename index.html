@@ -430,47 +430,36 @@
 
     const EXPERIENCES = [
       {
-        role: 'Marketing Executive',
-        company: 'Apex Creative Group',
-        period: '2023 — Present',
-        desc: 'Lead integrated marketing campaigns and brand strategy across digital and print channels. Oversee social media presence, content creation pipelines, and performance analytics for a portfolio of 12+ clients.',
+        role: 'Marketing Executive & Graphic Designer',
+        company: 'Renaissance Phuket Resort and Spa',
+        period: '2025 — Present',
+        desc: 'Design in-house promotional artworks for digital and print collaterals including menus, signages, and festive materials. Produce video content, food & beverage photography, and manage social media content ensuring alignment with Marriott brand standards.',
       },
       {
-        role: 'Senior Graphic Designer',
-        company: 'Studio Craft',
-        period: '2021 — 2023',
-        desc: 'Created visual identities, editorial layouts, and marketing materials for regional brands. Art directed photoshoots and video productions, and built a design system used across all client deliverables.',
-      },
-      {
-        role: 'Marketing Coordinator',
-        company: 'Bold Agency',
-        period: '2019 — 2021',
-        desc: 'Coordinated cross-channel campaigns, analyzed performance metrics, and produced creative content for social media and print. Supported pitch presentations and managed vendor relationships.',
-      },
-      {
-        role: 'Junior Designer',
-        company: 'Form & Function',
-        period: '2017 — 2019',
-        desc: 'Designed marketing collateral, social media graphics, and packaging mock-ups. Supported senior designers on brand identity projects and contributed to client presentations.',
+        role: 'Barista Manager & Brand Marketing Specialist',
+        company: "NAP's Coffee Roaster Ubon",
+        period: '2019 — 2025',
+        desc: 'Developed and executed digital marketing strategies across social media and e-commerce platforms. Designed packaging and created visual campaigns aligned with brand identity. Managed Shopee storefront and enhanced customer experience, driving online growth. Planned and optimized paid media campaigns on Facebook & Instagram. Collaborated with the founder on product launches, brand positioning, and overall marketing direction.',
       },
     ];
 
     const ARTWORK_ITEMS = [
-      { id: 'a1', title: 'Brand Identity System', label: 'BRAND IDENTITY', hue: 260 },
-      { id: 'a2', title: 'Event Poster Series', label: 'POSTER DESIGN', hue: 280 },
-      { id: 'a3', title: 'Editorial Layout', label: 'EDITORIAL', hue: 240 },
-      { id: 'a4', title: 'Annual Report Design', label: 'REPORT', hue: 220 },
-      { id: 'a5', title: 'Packaging Design', label: 'PACKAGING', hue: 300 },
-      { id: 'a6', title: 'Social Media Templates', label: 'SOCIAL KIT', hue: 250 },
+      // ใส่ img: 'URL รูป' เพื่อแสดงรูปจริง — ถ้าไม่ใส่จะเป็น placeholder
+      { id: 'a1', title: 'Brand Identity System', label: 'BRAND IDENTITY', hue: 260, img: 'https://images.unsplash.com/photo-1636633762833-5d1658f1e29b?w=800&q=80' },
+      { id: 'a2', title: 'Event Poster Series', label: 'POSTER DESIGN', hue: 280, img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80' },
+      { id: 'a3', title: 'Editorial Layout', label: 'EDITORIAL', hue: 240, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
+      { id: 'a4', title: 'Annual Report Design', label: 'REPORT', hue: 220, img: '' },
+      { id: 'a5', title: 'Packaging Design', label: 'PACKAGING', hue: 300, img: '' },
+      { id: 'a6', title: 'Social Media Templates', label: 'SOCIAL KIT', hue: 250, img: '' },
     ];
 
     const PHOTO_ITEMS = [
-      { id: 'p1', title: 'Urban Landscapes', label: 'URBAN', hue: 180 },
-      { id: 'p2', title: 'Product Photography', label: 'PRODUCT', hue: 160 },
-      { id: 'p3', title: 'Food Photography', label: 'FOOD', hue: 40 },
-      { id: 'p4', title: 'Portrait Series', label: 'PORTRAIT', hue: 20 },
-      { id: 'p5', title: 'Event Photography', label: 'EVENT', hue: 200 },
-      { id: 'p6', title: 'Architecture', label: 'ARCHITECTURE', hue: 190 },
+      { id: 'p1', title: 'Urban Landscapes', label: 'URBAN', hue: 180, img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80' },
+      { id: 'p2', title: 'Product Photography', label: 'PRODUCT', hue: 160, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80' },
+      { id: 'p3', title: 'Food Photography', label: 'FOOD', hue: 40, img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80' },
+      { id: 'p4', title: 'Portrait Series', label: 'PORTRAIT', hue: 20, img: '' },
+      { id: 'p5', title: 'Event Photography', label: 'EVENT', hue: 200, img: '' },
+      { id: 'p6', title: 'Architecture', label: 'ARCHITECTURE', hue: 190, img: '' },
     ];
 
     const VIDEO_ITEMS = [
@@ -737,10 +726,12 @@
                 <div className="gallery-card" onClick={() => setLightbox(item)}>
                   <div className="gallery-placeholder" style={{
                     aspectRatio,
-                    background: `repeating-linear-gradient(-45deg, transparent, transparent 10px, hsl(${item.hue}, 25%, 88%) 10px, hsl(${item.hue}, 25%, 88%) 20px), var(--card)`,
+                    background: item.img ? 'var(--card)' : `repeating-linear-gradient(-45deg, transparent, transparent 10px, hsl(${item.hue}, 25%, 88%) 10px, hsl(${item.hue}, 25%, 88%) 20px), var(--card)`,
                   }}>
-                    <span className="placeholder-label">{item.label}</span>
-                    <span className="placeholder-hint">drop image here</span>
+                    {item.img
+                      ? <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                      : <><span className="placeholder-label">{item.label}</span><span className="placeholder-hint">drop image here</span></>
+                    }
                   </div>
                   <div className="gallery-overlay">
                     <span className="gallery-overlay-title">{item.title}</span>
@@ -756,10 +747,12 @@
               <div className="lightbox-content" onClick={e => e.stopPropagation()}>
                 <div className="lightbox-image" style={{
                   aspectRatio,
-                  background: `repeating-linear-gradient(-45deg, transparent, transparent 14px, hsl(${lightbox.hue}, 25%, 86%) 14px, hsl(${lightbox.hue}, 25%, 86%) 28px), var(--card)`,
+                  background: lightbox.img ? '#000' : `repeating-linear-gradient(-45deg, transparent, transparent 14px, hsl(${lightbox.hue}, 25%, 86%) 14px, hsl(${lightbox.hue}, 25%, 86%) 28px), var(--card)`,
                 }}>
-                  <span className="placeholder-label" style={{ fontSize: 16 }}>{lightbox.label}</span>
-                  <span className="placeholder-hint">drop image here</span>
+                  {lightbox.img
+                    ? <img src={lightbox.img} alt={lightbox.title} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+                    : <><span className="placeholder-label" style={{ fontSize: 16 }}>{lightbox.label}</span><span className="placeholder-hint">drop image here</span></>
+                  }
                 </div>
                 <div className="lightbox-info">
                   <h3 className="lightbox-title">{lightbox.title}</h3>
