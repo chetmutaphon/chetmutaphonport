@@ -789,18 +789,12 @@
 
     // ── Photography (3:4 portrait) ────────────────────────────────────────────
     var PHOTO_ITEMS = [
-      { id:  1, title: "Artwork I",            category: "Editorial", img: 'images/AW1.jpg' },
-      { id:  2, title: "Artwork II",           category: "Editorial", img: 'images/AW2.jpg' },
-      { id:  3, title: "Artwork III",          category: "Editorial", img: 'images/AW3.jpg' },
-      { id:  4, title: "Artwork IV",           category: "Editorial", img: 'images/AW4.jpg' },
-      { id:  5, title: "Artwork V",            category: "Editorial", img: 'images/AW5.jpg' },
-      { id:  6, title: "Artwork VI",           category: "Editorial", img: 'images/AW6.jpg' },
-      { id:  7, title: "Golden Hour Pool",     category: "Resort",    img: makePlaceholder(600, 800, "Resort Pool", 30) },
-      { id:  8, title: "Signature Cocktail",   category: "F&B",       img: makePlaceholder(600, 800, "Cocktail Shot", 25) },
-      { id:  9, title: "Beachfront Dining",    category: "Event",     img: makePlaceholder(600, 800, "Beach Dining", 35) },
-      { id: 10, title: "Spa Interior",         category: "Resort",    img: makePlaceholder(600, 800, "Spa Room", 20) },
-      { id: 11, title: "Thai Cuisine Plating", category: "F&B",       img: makePlaceholder(600, 800, "Thai Dish", 32) },
-      { id: 12, title: "Lobby Architecture",   category: "Resort",    img: makePlaceholder(600, 800, "Hotel Lobby", 28) }
+      { id:  1, title: "Photo",            category: "Editorial", img: 'Photo1.png' },
+      { id:  2, title: "Photo",           category: "Editorial", img: 'Photo2.jpg' },
+      { id:  3, title: "Photo",          category: "Editorial", img: 'Photo3.jpg' },
+      { id:  4, title: "Photo",           category: "Editorial", img: 'Photo4.jpg' },
+      { id:  5, title: "Photo",            category: "Editorial", img: 'Photo5.png' },
+      { id:  6, title: "Photo",           category: "Editorial", img: 'Photo6.png' },
       // ↑ เพิ่ม: { id: 13, title: "...", category: "...", img: 'images/...' },
     ];
 
@@ -817,13 +811,13 @@
     ];
 
     // ── F&B Promotions ────────────────────────────────────────────────────────
-    var FNB_ITEMS = [
-      { id: 1, title: "The Trinity Burger — Premium Wagyu", category: "Sand Box", size: "large",  ratio: "4/5", img: 'images/fnb-trinity-burger.jpg' },
-      { id: 2, title: "Chef's Selection Set — Takieng",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'images/fnb-chefs-selection.jpg' },
-      { id: 3, title: "Tartare Selection",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'images/fnb-tartare-selection.jpg' },
-      { id: 4, title: "Pink Paradise Cocktail",             category: "Bar",      size: "medium", ratio: "4/5", img: 'images/fnb-pink-paradise.jpg' },
-      { id: 5, title: "Afternoon Tea Collection",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Afternoon Tea", 32) },
-      { id: 6, title: "Pool Bar Happy Hour",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "Happy Hour", 28) },
+    var FB_ITEMS = [
+      { id: 1, title: "The Trinity Burger — Premium Wagyu", category: "Sand Box", size: "large",  ratio: "4/5", img: 'AW1.jpg' },
+      { id: 2, title: "Chef's Selection Set — Takieng",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'AW2.jpg' },
+      { id: 3, title: "Tartare Selection",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'AW3.jpg' },
+      { id: 4, title: "Pink Paradise Cocktail",             category: "Bar",      size: "medium", ratio: "4/5", img: 'AW4.jpg' },
+      { id: 5, title: "Afternoon Tea Collection",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "AW5.jpg", 32) },
+      { id: 6, title: "Pool Bar Happy Hour",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "AW6.jpg", 28) },
       { id: 7, title: "Thai Street Food Night",             category: "Event",    size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Street Food", 38) },
       { id: 8, title: "Beachfront BBQ",                     category: "Event",    size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "BBQ Night", 18) }
       // ↑ เพิ่ม: { id: 9, title: "...", category: "...", size: "small", ratio: "4/5", img: 'images/...' },
@@ -844,14 +838,13 @@
 
     // ── Social Media Content ──────────────────────────────────────────────────
     var SOCIAL_ITEMS = [
-      { id: 1, title: "Resort Highlights Reel",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
-      { id: 2, title: "Behind the Scenes — Kitchen",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
-      { id: 3, title: "Guest Experience Stories",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
-      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
-      { id: 5, title: "Coffee Art Process",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
-      { id: 6, title: "New Menu Launch",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
-      { id: 7, title: "Sunset Timelapse",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
-      { id: 8, title: "Room Reveal — Suite Tour",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
+      { id: 1, title: "Social",       type: "reel",     thumbnail: makePlaceholder(360, 640, "So1.png", 30) },
+      { id: 2, title: "Social",  type: "reel",     thumbnail: makePlaceholder(360, 640, "So2.png", 25) },
+      { id: 3, title: "Social",     type: "carousel", thumbnail: makePlaceholder(360, 640, "So3.png", 35) },
+      { id: 4, title: "Social", type: "reel",     thumbnail: makePlaceholder(360, 640, "So4.png", 20) },
+      { id: 5, title: "Social",           type: "reel",     thumbnail: makePlaceholder(360, 640, "So5.png", 38) },
+      { id: 6, title: "Social",              type: "carousel", thumbnail: makePlaceholder(360, 640, "So6.png", 32) },
+      { id: 7, title: "Social",             type: "reel",     thumbnail: makePlaceholder(360, 640, "So7.png", 15) },
       // ↑ เพิ่ม: { id: 9, title: "...", type: "reel", thumbnail: 'images/...' },
     ];
 
@@ -1666,14 +1659,14 @@
           <main>
             <HeroSection />
             <AboutSection />
-            <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            {/* <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
             <PhotoSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <VideoSection tweaks={effectiveTweaks} />
             <FnbSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
-            <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            {/* <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
             <SocialSection tweaks={effectiveTweaks} />
-            <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
-            <NewsletterSection />
+            {/* <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
+            {/* <NewsletterSection /> */}
             <ContactSection />
             <Footer />
           </main>
