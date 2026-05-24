@@ -354,6 +354,9 @@
 <body>
   <div id="root"></div>
 
+  <!-- แก้ไขผลงาน รูปภาพ และวิดีโอ ที่ไฟล์ content.js -->
+  <script src="content.js"></script>
+
   <script type="text/babel">
     // ── DATA ──────────────────────────────────────────────────────────────────
 
@@ -423,9 +426,9 @@
     }
 
     const SKILLS = [
-      'Graphic Design', 'Photography', 'Videography', 'Content Writer',
+      'Graphic Design', 'Photography', 'Videography', 'Marketing Strategy',
       'Social Media Management', 'Adobe Creative Suite', 'Content Creation',
-      'Brand Development', 'Art Direction', 'Generative AI', 'Print Design', 'Analytics',
+      'Brand Development', 'Art Direction', 'Motion Graphics', 'Print Design', 'Analytics',
     ];
 
     const EXPERIENCES = [
@@ -443,42 +446,7 @@
       },
     ];
 
-    const ARTWORK_ITEMS = [
-      // ใส่ img: 'URL รูป' เพื่อแสดงรูปจริง — ถ้าไม่ใส่จะเป็น placeholder
-      { id: 'a1', title: 'Brand Identity System', label: 'BRAND IDENTITY', hue: 260, img: 'https://images.unsplash.com/photo-1636633762833-5d1658f1e29b?w=800&q=80' },
-      { id: 'a2', title: 'Event Poster Series', label: 'POSTER DESIGN', hue: 280, img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80' },
-      { id: 'a3', title: 'Editorial Layout', label: 'EDITORIAL', hue: 240, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
-      { id: 'a4', title: 'Annual Report Design', label: 'REPORT', hue: 220, img: '' },
-      { id: 'a5', title: 'Packaging Design', label: 'PACKAGING', hue: 300, img: '' },
-      { id: 'a6', title: 'Social Media Templates', label: 'SOCIAL KIT', hue: 250, img: '' },
-    ];
-
-    const PHOTO_ITEMS = [
-      { id: 'p1', title: 'Urban Landscapes', label: 'URBAN', hue: 180, img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80' },
-      { id: 'p2', title: 'Product Photography', label: 'PRODUCT', hue: 160, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80' },
-      { id: 'p3', title: 'Food Photography', label: 'FOOD', hue: 40, img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80' },
-      { id: 'p4', title: 'Portrait Series', label: 'PORTRAIT', hue: 20, img: '' },
-      { id: 'p5', title: 'Event Photography', label: 'EVENT', hue: 200, img: '' },
-      { id: 'p6', title: 'Architecture', label: 'ARCHITECTURE', hue: 190, img: '' },
-    ];
-
-    const VIDEO_ITEMS = [
-      { id: 'v1', title: 'Brand Story', desc: 'Company brand narrative video', vimeoId: '76979871' },
-      { id: 'v2', title: 'Product Launch', desc: 'New product reveal campaign', vimeoId: '137857207' },
-      { id: 'v3', title: 'Behind the Scenes', desc: 'Creative process documentary', vimeoId: '169599296' },
-      { id: 'v4', title: 'Event Highlight', desc: 'Corporate event recap', vimeoId: '174316908' },
-      { id: 'v5', title: 'Social Reel', desc: 'Short-form social content', vimeoId: '259411563' },
-      { id: 'v6', title: 'Client Testimonial', desc: 'Customer success story', vimeoId: '347119375' },
-    ];
-
-    const DASHBOARD_ITEMS = [
-      { id: 'd1', title: 'Social Media Analytics', label: 'SOCIAL ANALYTICS', hue: 210 },
-      { id: 'd2', title: 'Campaign Performance', label: 'CAMPAIGN KPI', hue: 150 },
-      { id: 'd3', title: 'Content Calendar', label: 'CONTENT PLAN', hue: 30 },
-      { id: 'd4', title: 'Engagement Metrics', label: 'ENGAGEMENT', hue: 340 },
-      { id: 'd5', title: 'ROI Dashboard', label: 'ROI REPORT', hue: 120 },
-      { id: 'd6', title: 'Monthly Performance', label: 'MONTHLY REVIEW', hue: 270 },
-    ];
+    // ข้อมูลผลงานโหลดจาก content.js (แก้ไขที่ไฟล์นั้นได้เลย)
 
     // ── HOOKS ─────────────────────────────────────────────────────────────────
 
