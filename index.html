@@ -449,7 +449,7 @@
       background: var(--bg-card);
     }
     .social-card img {
-      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      width: 120%; aspect-ratio: 4/3; object-fit: cover;
       transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
     }
     .social-card:hover img { transform: scale(1.02); opacity: 0.85; }
@@ -800,13 +800,12 @@
 
     // ── Video — vimeoId จาก vimeo.com/XXXXXXX ────────────────────────────────
     var VIDEO_ITEMS = [
-      { id: 1, title: "Resort Experience Film",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Resort Film", 30),   vimeoId: "" },
-      { id: 2, title: "Cocktail Making Reel",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Cocktail Reel", 25), vimeoId: "" },
-      { id: 3, title: "Spa Journey",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "Spa Film", 20),      vimeoId: "" },
-      { id: 4, title: "Chef's Table Experience", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Chef Table", 35),   vimeoId: "" },
-      { id: 5, title: "Sunset Pool Party",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Pool Party", 15),   vimeoId: "" },
-      { id: 6, title: "Room Tour — Ocean Suite", category: "Resort",  thumbnail: makePlaceholder(360, 640, "Room Tour", 28),    vimeoId: "" },
-      { id: 7, title: "Lifestyle Reel",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "Lifestyle", 32),    vimeoId: "" }
+      { id: 1, title: "Soon",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Resort Film", 30),   vimeoId: "" },
+      { id: 2, title: "Soon",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Cocktail Reel", 25), vimeoId: "" },
+      { id: 3, title: "Soon",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "Spa Film", 20),      vimeoId: "" },
+      { id: 4, title: "Soon", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Chef Table", 35),   vimeoId: "" },
+      { id: 5, title: "Soon",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Pool Party", 15),   vimeoId: "" },
+      { id: 6, title: "Soon", category: "Resort",  thumbnail: makePlaceholder(360, 640, "Room Tour", 28),    vimeoId: "" },
       // ↑ เพิ่ม: { id: 8, title: "...", category: "...", thumbnail: 'images/...', vimeoId: "1234567" },
     ];
 
@@ -1165,7 +1164,7 @@
           <div className="about-grid">
             <ScrollReveal>
               <div className="about-portrait">
-                <img src={window.makePlaceholder(600, 800, 'portrait photo', 28)} alt="Chet Mutaphon" />
+                <img src={'Profile.jpg'} alt="Chet Mutaphon" />
               </div>
             </ScrollReveal>
             <div>
@@ -1664,7 +1663,7 @@
             {/* <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
             <SocialSection tweaks={effectiveTweaks} />
             {/* <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
-            <NewsletterSection /> */}
+            {/* <NewsletterSection /> */}
             <ContactSection />
             <Footer />
           </main>
