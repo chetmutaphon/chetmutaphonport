@@ -72,7 +72,7 @@ var PHOTO_ITEMS = [
     title: 'Urban Landscapes',
     label: 'URBAN',
     hue: 180,
-    img: '', Photo1.png ,
+    img: '', Photo1.png
   },
   {
     id: 'p2',
