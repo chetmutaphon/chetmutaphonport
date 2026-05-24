@@ -15,7 +15,7 @@ var ARTWORK_ITEMS = [
     title: 'Brand Identity System',   // ← ชื่อผลงาน
     label: 'BRAND IDENTITY',          // ← ป้ายกำกับ (ตัวพิมพ์ใหญ่)
     hue: 260,                         // ← สี placeholder (0-360)
-    img: '',                          // ← URL หรือ path รูป เช่น 'images/artwork1.jpg'
+    img: '', Photo1.png                          // ← URL หรือ path รูป เช่น 'images/artwork1.jpg'
   },
   {
     id: 'a2',
