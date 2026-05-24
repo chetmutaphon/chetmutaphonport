@@ -15,42 +15,42 @@ var ARTWORK_ITEMS = [
     title: 'Brand Identity System',   // ← ชื่อผลงาน
     label: 'BRAND IDENTITY',          // ← ป้ายกำกับ (ตัวพิมพ์ใหญ่)
     hue: 260,                         // ← สี placeholder (0-360)
-    img: '',                          // ← URL หรือ path รูป เช่น 'images/artwork1.jpg'
+    img: 'AW1',                          // ← URL หรือ path รูป เช่น 'images/artwork1.jpg'
   },
   {
     id: 'a2',
     title: 'Event Poster Series',
     label: 'POSTER DESIGN',
     hue: 280,
-    img: '',
+    img: 'AW2',
   },
   {
     id: 'a3',
     title: 'Editorial Layout',
     label: 'EDITORIAL',
     hue: 240,
-    img: '',
+    img: 'AW3',
   },
   {
     id: 'a4',
     title: 'Annual Report Design',
     label: 'REPORT',
     hue: 220,
-    img: '',
+    img: 'AW4',
   },
   {
     id: 'a5',
     title: 'Packaging Design',
     label: 'PACKAGING',
     hue: 300,
-    img: '',
+    img: 'AW5',
   },
   {
     id: 'a6',
     title: 'Social Media Templates',
     label: 'SOCIAL KIT',
     hue: 250,
-    img: '',
+    img: 'AW6',
   },
   // ต้องการเพิ่มผลงาน? copy block ด้านล่างแล้ว paste ต่อได้เลย
   // {
