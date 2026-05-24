@@ -1,927 +1,1712 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chet Mutaphon — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chet Mutaphon — Creative Portfolio</title>
+  <meta name="description" content="Chet Mutaphon — Creative Director & Visual Storyteller. Luxury hospitality photography, brand campaigns, and editorial design from Phuket, Thailand." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" />
+
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    /* ─── Chet Mutaphon Portfolio — Ultra Minimal Luxury ─── */
+
     :root {
-      --font-body: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-      --font-heading: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-      --heading-weight: 700;
-      --bg: #ffffff;
-      --bg-alt: #f5f5f7;
-      --text: #1d1d1f;
-      --text-secondary: #86868b;
-      --accent: #1d1d1f;
-      --border: #d2d2d7;
-      --card: #f5f5f7;
-      --nav-bg: rgba(255,255,255,0.72);
-      --radius: 18px;
-      --hero-size: clamp(48px, 8vw, 88px);
-      --hero-align: center;
-      --hero-items: center;
-      --section-gap: 120px;
-      --gallery-cols: 3;
+      --bg-deepest: #0a0908;
+      --bg-dark: #111010;
+      --bg-card: #161514;
+      --bg-elevated: #1c1a19;
+      --bg-hover: #242220;
+      --text-primary: #e4ddd0;
+      --text-secondary: #8a8078;
+      --text-muted: #524b44;
+      --accent: #b89b71;
+      --accent-dim: #8a7a60;
+      --border: #1f1d1b;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', 'Helvetica Neue', Helvetica, sans-serif;
+      --font-display-alt: 'Cormorant Garamond', Georgia, serif;
+      --page-pad: clamp(28px, 6vw, 120px);
+      --gap-section: clamp(120px, 16vh, 240px);
+      --grid-gap: 4px;
+      --masonry-cols: 4;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
       font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg-deepest);
+      color: var(--text-primary);
+      line-height: 1.6;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      transition: background 0.5s ease, color 0.5s ease;
-    }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-    /* SCROLL PROGRESS */
-    .scroll-progress {
-      position: fixed; top: 0; left: 0; z-index: 1002;
-      height: 2px; background: var(--accent);
-      transition: width 0.05s linear;
+      font-weight: 300;
     }
 
-    /* NAV */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      height: 56px; display: flex; align-items: center;
-      justify-content: space-between; padding: 0 48px;
-      background: transparent; border-bottom: 1px solid transparent;
-      transition: all 0.35s ease;
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+
+    .scroll-progress { display: none; }
+
+    /* ─── Navigation ─── */
+    .nav-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px var(--page-pad);
+      transition: background 0.6s, backdrop-filter 0.6s;
     }
-    .nav--scrolled {
-      background: var(--nav-bg);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom-color: var(--border);
+    .nav-bar.scrolled {
+      background: rgba(10, 9, 8, 0.85);
+      backdrop-filter: blur(30px) saturate(1.2);
     }
     .nav-logo {
-      font-family: var(--font-heading); font-weight: var(--heading-weight);
-      font-size: 17px; color: var(--text); cursor: pointer;
-      letter-spacing: -0.02em; text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.72rem; font-weight: 400;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--text-secondary);
     }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-link {
-      font-size: 14px; color: var(--text-secondary); cursor: pointer;
-      text-decoration: none; font-weight: 400; letter-spacing: 0.01em;
-      transition: color 0.25s ease; position: relative;
+    .nav-burger {
+      width: 32px; height: 20px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 0;
     }
-    .nav-link:hover { color: var(--text); }
-    .nav-link--active { color: var(--text); font-weight: 600; }
-    .nav-link--active::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
-      height: 1.5px; background: var(--accent); border-radius: 1px;
+    .nav-burger span {
+      display: block; width: 100%; height: 1px;
+      background: var(--text-secondary);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
     }
+    .nav-burger.open span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: var(--hero-items, center); justify-content: center;
-      padding: 80px 48px 40px; position: relative;
+    /* ─── Overlay Menu ─── */
+    .menu-overlay {
+      position: fixed; inset: 0; z-index: 800;
+      background: var(--bg-deepest);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .hero-content { text-align: var(--hero-align, center); max-width: 900px; }
-    .hero-name {
-      font-family: var(--font-heading); font-weight: var(--heading-weight);
-      font-size: var(--hero-size); letter-spacing: -0.04em;
-      line-height: 1.05; color: var(--text);
+    .menu-overlay.open { opacity: 1; pointer-events: all; }
+    .menu-overlay nav {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .menu-link {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+      font-weight: 400; letter-spacing: 0.03em;
+      color: var(--text-muted);
+      padding: 8px 0;
+      transition: color 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(16px); opacity: 0;
+    }
+    .menu-overlay.open .menu-link { transform: translateY(0); opacity: 1; }
+    .menu-link:hover, .menu-link.active { color: var(--text-primary); }
+    .menu-overlay.open .menu-link:nth-child(1) { transition-delay: 0.05s; }
+    .menu-overlay.open .menu-link:nth-child(2) { transition-delay: 0.08s; }
+    .menu-overlay.open .menu-link:nth-child(3) { transition-delay: 0.11s; }
+    .menu-overlay.open .menu-link:nth-child(4) { transition-delay: 0.14s; }
+    .menu-overlay.open .menu-link:nth-child(5) { transition-delay: 0.17s; }
+    .menu-overlay.open .menu-link:nth-child(6) { transition-delay: 0.20s; }
+    .menu-overlay.open .menu-link:nth-child(7) { transition-delay: 0.23s; }
+    .menu-overlay.open .menu-link:nth-child(8) { transition-delay: 0.26s; }
+    .menu-overlay.open .menu-link:nth-child(9) { transition-delay: 0.29s; }
+    .menu-overlay.open .menu-link:nth-child(10) { transition-delay: 0.32s; }
+    .menu-overlay.open .menu-link:nth-child(11) { transition-delay: 0.35s; }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: flex-end; justify-content: flex-start;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      animation: heroZoom 25s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10, 9, 8, 0.92) 0%,
+        rgba(10, 9, 8, 0.35) 50%,
+        rgba(10, 9, 8, 0.15) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 var(--page-pad) clamp(80px, 12vh, 160px);
+    }
+    .hero-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      animation: fadeUp 1.2s ease 0.4s both;
     }
     .hero-title {
-      font-size: clamp(16px, 2vw, 22px); color: var(--text-secondary);
-      margin-top: 16px; font-weight: 400; letter-spacing: -0.01em;
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6.5vw, 6rem);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      animation: fadeUp 1.2s ease 0.6s both;
     }
-    .hero-tagline {
-      font-size: clamp(14px, 1.4vw, 17px); color: var(--text-secondary);
-      margin: 12px auto 0; opacity: 0.7; max-width: 500px; line-height: 1.6;
+    .hero-subtitle {
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      color: var(--text-muted);
+      max-width: 440px; line-height: 1.8;
+      margin-top: 28px; font-weight: 300;
+      animation: fadeUp 1.2s ease 0.9s both;
     }
-    .scroll-hint {
-      position: absolute; bottom: 32px;
-      left: 50%; transform: translateX(-50%);
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-    .scroll-hint-line {
-      width: 1px; height: 48px; position: relative; overflow: hidden;
-      background: var(--border);
+    .hero-scroll-line {
+      width: 1px; height: 48px; background: var(--text-muted); opacity: 0.3;
+      animation: scrollPulse 2.5s ease-in-out infinite;
     }
-    .scroll-hint-line::after {
-      content: ''; position: absolute; top: -48px; left: 0;
-      width: 1px; height: 48px; background: var(--accent);
-      animation: scrollLine 2s ease-in-out infinite;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes scrollLine {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(96px); }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.15; transform: scaleY(0.4); }
+      50% { opacity: 0.4; transform: scaleY(1); }
     }
 
-    /* SECTIONS */
-    .section { padding: var(--section-gap) 0; transition: background 0.5s ease; }
-    .section--alt { background: var(--bg-alt); }
-    .section-inner { max-width: 1120px; margin: 0 auto; padding: 0 48px; }
-    .section-label {
-      font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--accent); margin-bottom: 12px; font-weight: 600;
-      transition: color 0.5s ease;
-    }
+    /* ─── Section Headers ─── */
+    .section { padding: var(--gap-section) var(--page-pad); }
+    .section-header { margin-bottom: clamp(48px, 6vh, 88px); }
     .section-title {
-      font-family: var(--font-heading); font-weight: var(--heading-weight);
-      font-size: clamp(32px, 4vw, 52px); letter-spacing: -0.03em;
-      line-height: 1.15; color: var(--text); margin-bottom: 48px;
-      transition: color 0.5s ease;
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: 0.01em;
     }
 
-    /* ABOUT */
-    .about-text {
-      font-size: 18px; line-height: 1.75; color: var(--text-secondary);
-      max-width: 680px; margin-bottom: 48px; transition: color 0.5s ease;
-    }
-    .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill-tag {
-      padding: 8px 20px; border-radius: 100px;
-      font-size: 14px; font-weight: 500;
-      border: 1px solid var(--border); color: var(--text); background: var(--bg);
-      transition: all 0.3s ease; cursor: default;
-    }
-    .skill-tag:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-    /* TIMELINE */
-    .timeline { position: relative; padding-left: 40px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 5px; top: 8px; bottom: 40px;
-      width: 1.5px; background: var(--border); transition: background 0.5s ease;
-    }
-    .timeline-item { position: relative; padding-bottom: 40px; }
-    .timeline-dot {
-      position: absolute; left: -40px; top: 8px;
-      width: 11px; height: 11px; border-radius: 50%;
-      background: var(--bg); border: 2px solid var(--accent); z-index: 1;
-      transition: all 0.5s ease;
-    }
-    .timeline-card {
-      background: var(--card); border-radius: var(--radius);
-      padding: 28px 32px; transition: transform 0.4s ease, background 0.5s ease;
-    }
-    .timeline-card:hover { transform: translateX(4px); }
-    .timeline-header {
-      display: flex; justify-content: space-between;
-      align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;
-    }
-    .timeline-role {
-      font-family: var(--font-heading); font-weight: var(--heading-weight);
-      font-size: 18px; color: var(--text); transition: color 0.5s ease;
-    }
-    .timeline-period {
-      font-size: 13px; color: var(--text-secondary); font-weight: 500;
-      letter-spacing: 0.02em; transition: color 0.5s ease;
-    }
-    .timeline-company {
-      font-size: 14px; color: var(--accent); margin-bottom: 10px;
-      font-weight: 500; transition: color 0.5s ease;
-    }
-    .timeline-desc {
-      font-size: 15px; line-height: 1.65; color: var(--text-secondary);
-      transition: color 0.5s ease;
-    }
-
-    /* GALLERY */
-    .gallery-grid {
+    /* ─── About ─── */
+    .about-grid {
       display: grid;
-      grid-template-columns: repeat(var(--gallery-cols, 3), 1fr);
-      gap: 20px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(60px, 8vw, 140px);
+      align-items: start;
     }
-    .gallery-card {
-      position: relative; border-radius: var(--radius);
-      overflow: hidden; cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-radius 0.5s ease;
+    .about-portrait {
+      aspect-ratio: 3/4;
+      background: var(--bg-card);
+      overflow: hidden;
     }
-    .gallery-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
-    .gallery-placeholder {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 8px;
+    .about-portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .about-bio {
+      font-size: 0.95rem;
+      line-height: 2; color: var(--text-secondary);
+      margin-bottom: 48px; font-weight: 300;
     }
-    .placeholder-label {
-      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
-      font-size: 11px; letter-spacing: 0.15em; color: var(--text-secondary);
-      font-weight: 500; transition: color 0.5s ease;
+    .about-exp { margin-bottom: 56px; }
+    .about-exp-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
     }
-    .placeholder-hint {
-      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
-      font-size: 10px; color: var(--text-secondary); opacity: 0.5;
-      transition: color 0.5s ease;
+    .about-exp-role {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 400;
+      margin-bottom: 4px;
     }
-    .gallery-overlay {
-      position: absolute; inset: 0; background: rgba(0,0,0,0);
-      display: flex; align-items: flex-end; padding: 20px;
-      transition: background 0.35s ease;
+    .about-exp-company {
+      color: var(--text-muted); font-size: 0.8rem;
+      letter-spacing: 0.08em; font-weight: 400;
     }
-    .gallery-card:hover .gallery-overlay { background: rgba(0,0,0,0.5); }
-    .gallery-overlay-title {
-      color: #fff; font-weight: 600; font-size: 15px;
-      opacity: 0; transform: translateY(8px); transition: all 0.35s ease;
+    .about-exp-period {
+      font-size: 0.7rem; color: var(--text-muted); margin: 8px 0;
+      letter-spacing: 0.15em; font-weight: 300; opacity: 0.6;
     }
-    .gallery-card:hover .gallery-overlay-title { opacity: 1; transform: translateY(0); }
+    .about-skills { display: flex; flex-wrap: wrap; gap: 16px; }
+    .skill-tag {
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); font-weight: 300; padding: 0; border: none;
+      transition: color 0.4s;
+    }
+    .skill-tag:hover { color: var(--text-secondary); }
 
-    /* VIDEO */
-    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    /* ─── Selected Works ─── */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--grid-gap);
+    }
+    .work-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      aspect-ratio: 4/3; background: var(--bg-card);
+    }
+    .work-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s;
+    }
+    .work-card:hover img { transform: scale(1.03); opacity: 0.85; }
+    .work-card-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: clamp(20px, 2.5vw, 36px);
+      background: linear-gradient(to top, rgba(10, 9, 8, 0.7) 0%, transparent 100%);
+      opacity: 0; transition: opacity 0.5s;
+    }
+    .work-card:hover .work-card-overlay { opacity: 1; }
+    .work-card-cat {
+      font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 6px; font-weight: 400;
+    }
+    .work-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.2vw, 1.15rem); font-weight: 400;
+    }
+
+    /* ─── Photo Masonry ─── */
+    .photo-filters {
+      display: flex; gap: 24px; margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      border: none; color: var(--text-muted); font-weight: 300;
+      transition: color 0.4s; background: none;
+    }
+    .filter-btn:hover, .filter-btn.active { color: var(--text-primary); }
+    .masonry-grid {
+      column-count: var(--masonry-cols);
+      column-gap: var(--grid-gap);
+    }
+    .masonry-item {
+      break-inside: avoid; margin-bottom: var(--grid-gap);
+      position: relative; overflow: hidden;
+      cursor: pointer; background: var(--bg-card);
+    }
+    .masonry-item img {
+      width: 100%; display: block;
+      aspect-ratio: 3/4; object-fit: cover;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+    }
+    .masonry-item:hover img { transform: scale(1.02); opacity: 0.9; }
+    .masonry-item-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: flex-end; padding: 14px;
+      opacity: 0; transition: opacity 0.5s;
+      background: linear-gradient(to top, rgba(10,9,8,0.5) 0%, transparent 40%);
+    }
+    .masonry-item:hover .masonry-item-overlay { opacity: 1; }
+    .masonry-item-title { font-size: 0.7rem; font-weight: 300; letter-spacing: 0.05em; }
+
+    /* ─── Video Grid ─── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--grid-gap);
+    }
     .video-card {
-      cursor: pointer; border-radius: var(--radius); overflow: hidden;
-      background: var(--card); transition: all 0.4s ease;
+      position: relative; overflow: hidden; cursor: pointer;
+      background: var(--bg-card);
     }
-    .video-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
-    .video-thumb {
-      aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
-      background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(0,0,0,0.03) 12px, rgba(0,0,0,0.03) 24px), var(--card);
-      transition: background 0.5s ease;
+    .video-card-inner {
+      width: 100%; aspect-ratio: 9/16; position: relative;
+      overflow: hidden; background: #0a0908;
     }
-    .video-play { color: var(--text); opacity: 0.3; transition: all 0.35s ease; }
-    .video-card:hover .video-play { opacity: 0.8; transform: scale(1.08); }
-    .video-info { padding: 16px 20px; }
-    .video-title {
-      font-family: var(--font-heading); font-weight: 600;
-      font-size: 15px; color: var(--text); margin-bottom: 4px;
-      transition: color 0.5s ease;
+    .video-card-inner iframe {
+      position: absolute; top: 50%; left: 50%;
+      width: 100%; height: 100%;
+      transform: translate(-50%, -50%);
+      border: none; pointer-events: none;
     }
-    .video-desc { font-size: 13px; color: var(--text-secondary); transition: color 0.5s ease; }
-
-    /* MODALS */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 2000;
-      background: rgba(0,0,0,0.85);
+    .video-card-inner img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+    }
+    .video-card:hover .video-card-inner img { transform: scale(1.02); opacity: 0.85; }
+    .video-play-icon {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px; height: 48px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      animation: fadeIn 0.3s ease; cursor: zoom-out; padding: 48px;
+      opacity: 0; transition: opacity 0.4s;
+      z-index: 2;
     }
-    .modal-overlay--dark { background: rgba(0,0,0,0.95); }
-    .modal-close {
-      position: fixed; top: 20px; right: 24px; width: 40px; height: 40px;
-      border-radius: 50%; background: rgba(255,255,255,0.1); border: none;
-      color: #fff; font-size: 18px; cursor: pointer;
+    .video-card:hover .video-play-icon { opacity: 1; }
+    .video-play-icon::after {
+      content: ''; display: block;
+      width: 0; height: 0;
+      border-left: 11px solid rgba(255,255,255,0.7);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      margin-left: 3px;
+    }
+    .video-card-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 14px;
+      background: linear-gradient(to top, rgba(10,9,8,0.6), transparent);
+      opacity: 0; transition: opacity 0.5s; z-index: 2;
+    }
+    .video-card:hover .video-card-info { opacity: 1; }
+    .video-card-title { font-size: 0.72rem; font-weight: 300; }
+    .video-card-cat {
+      font-size: 0.58rem; color: var(--text-muted);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-top: 3px; font-weight: 300;
+    }
+
+    /* ─── F&B Poster Wall ─── */
+    .fnb-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(200px, auto);
+      gap: var(--grid-gap);
+    }
+    .fnb-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: var(--bg-card);
+    }
+    .fnb-card.large { grid-column: span 2; grid-row: span 2; }
+    .fnb-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+    }
+    .fnb-card:hover img { transform: scale(1.02); opacity: 0.85; }
+    .fnb-card-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: clamp(12px, 1.5vw, 20px);
+      background: linear-gradient(to top, rgba(10,9,8,0.6) 0%, transparent 100%);
+      opacity: 0; transition: opacity 0.5s;
+    }
+    .fnb-card:hover .fnb-card-overlay { opacity: 1; }
+    .fnb-card-cat {
+      font-size: 0.55rem; color: var(--text-muted);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 4px; font-weight: 300;
+    }
+    .fnb-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.78rem, 1vw, 1rem); font-weight: 400;
+    }
+
+    /* ─── Sales Grid ─── */
+    .sales-featured {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--grid-gap); margin-bottom: var(--grid-gap);
+    }
+    .sales-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: var(--bg-card); aspect-ratio: 4/3;
+    }
+    .sales-card.hero-card { aspect-ratio: 16/9; }
+    .sales-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+    }
+    .sales-card:hover img { transform: scale(1.02); opacity: 0.85; }
+    .sales-card-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: clamp(16px, 2vw, 28px);
+      background: linear-gradient(to top, rgba(10,9,8,0.6), transparent);
+      opacity: 0; transition: opacity 0.5s;
+    }
+    .sales-card:hover .sales-card-overlay { opacity: 1; }
+    .sales-card-cat {
+      font-size: 0.55rem; color: var(--text-muted);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 4px; font-weight: 300;
+    }
+    .sales-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem); font-weight: 400;
+    }
+    .sales-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    /* ─── Social Feed ─── */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--grid-gap);
+    }
+    .social-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: var(--bg-card);
+    }
+    .social-card img {
+      width: 100%; aspect-ratio: 9/16; object-fit: cover;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+    }
+    .social-card:hover img { transform: scale(1.02); opacity: 0.85; }
+    .social-card-badge {
+      position: absolute; top: 10px; left: 10px;
+      padding: 3px 8px; font-size: 0.5rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      background: rgba(10, 9, 8, 0.5);
+      backdrop-filter: blur(12px); font-weight: 300;
+    }
+    .social-card-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 12px;
+      background: linear-gradient(to top, rgba(10,9,8,0.5), transparent);
+      opacity: 0; transition: opacity 0.5s;
+    }
+    .social-card:hover .social-card-info { opacity: 1; }
+    .social-card-title { font-size: 0.68rem; font-weight: 300; }
+
+    /* ─── Dashboard Grid ─── */
+    .dash-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: var(--grid-gap);
+    }
+    .dash-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: var(--bg-card); aspect-ratio: 4/3;
+    }
+    .dash-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+    }
+    .dash-card:hover img { transform: scale(1.02); opacity: 0.85; }
+    .dash-card-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: clamp(16px, 2vw, 24px);
+      background: linear-gradient(to top, rgba(10,9,8,0.6), transparent);
+      opacity: 0; transition: opacity 0.5s;
+    }
+    .dash-card:hover .dash-card-overlay { opacity: 1; }
+    .dash-card-cat {
+      font-size: 0.55rem; color: var(--text-muted);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 4px; font-weight: 300;
+    }
+    .dash-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.82rem, 1.1vw, 1rem); font-weight: 400;
+    }
+
+    /* ─── Newsletter ─── */
+    .newsletter-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .newsletter-card {
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .newsletter-card:hover { transform: translateY(-6px); }
+    .newsletter-cover {
+      aspect-ratio: 5/7; overflow: hidden;
+      background: var(--bg-card);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+    .newsletter-cover img { width: 100%; height: 100%; object-fit: cover; }
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: 0.88rem; font-weight: 400; margin-bottom: 4px;
+    }
+    .newsletter-meta {
+      font-size: 0.62rem; color: var(--text-muted);
+      letter-spacing: 0.15em; text-transform: uppercase; font-weight: 300;
+    }
+
+    /* ─── Newsletter Reader Modal ─── */
+    .reader-modal {
+      position: fixed; inset: 0; z-index: 950;
+      background: rgba(6, 5, 4, 0.96);
+      backdrop-filter: blur(24px);
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s ease; z-index: 2001;
     }
-    .modal-close:hover { background: rgba(255,255,255,0.2); }
-    .lightbox-content { max-width: 800px; width: 100%; animation: scaleIn 0.3s ease; cursor: default; }
-    .lightbox-image {
-      border-radius: 12px; overflow: hidden;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 8px;
+    .reader-book {
+      width: 65vw; max-width: 860px;
+      aspect-ratio: 1.4/1;
+      background: var(--bg-card);
+      box-shadow: 0 24px 100px rgba(0,0,0,0.6);
+      display: flex; position: relative; overflow: hidden;
     }
-    .lightbox-info { padding: 20px 0; }
-    .lightbox-title {
-      color: #fff; font-family: var(--font-heading);
-      font-weight: var(--heading-weight); font-size: 20px;
-    }
-    .video-modal { width: 100%; max-width: 960px; cursor: default; animation: scaleIn 0.3s ease; }
-    .video-embed { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #000; }
-    .video-modal-title { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 16px; text-align: center; }
-
-    /* THEME SWITCHER */
-    .theme-switcher {
-      position: fixed; bottom: 24px; right: 24px; z-index: 999;
-      display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
-    }
-    .theme-btn {
-      padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 500;
-      border: 1px solid var(--border); background: var(--nav-bg);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      color: var(--text); cursor: pointer; transition: all 0.25s ease;
-      white-space: nowrap; font-family: var(--font-body);
-    }
-    .theme-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .theme-btn--active { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .theme-toggle {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border); cursor: pointer;
+    .reader-page {
+      flex: 1; padding: 40px;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.25s ease; color: var(--text);
+      border-right: 1px solid var(--border);
     }
-    .theme-toggle:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .theme-menu {
-      display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
-      animation: fadeIn 0.2s ease;
+    .reader-page:last-child { border-right: none; }
+    .reader-page img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .reader-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--text-muted); transition: color 0.3s;
+    }
+    .reader-nav:hover { color: var(--text-primary); }
+    .reader-nav.prev { left: 12px; }
+    .reader-nav.next { right: 12px; }
+    .reader-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--text-muted); transition: color 0.3s;
+    }
+    .reader-close:hover { color: var(--text-primary); }
+
+    /* ─── Contact ─── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(60px, 8vw, 140px);
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 36px; }
+    .contact-label {
+      font-size: 0.58rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 8px; font-weight: 300;
+    }
+    .contact-value {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      color: var(--text-secondary); font-weight: 400; transition: color 0.4s;
+    }
+    a.contact-value:hover { color: var(--text-primary); }
+    .contact-form { display: flex; flex-direction: column; gap: 24px; }
+    .form-field { display: flex; flex-direction: column; gap: 8px; }
+    .form-field label {
+      font-size: 0.58rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--text-muted); font-weight: 300;
+    }
+    .form-field input, .form-field textarea {
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0; font-family: var(--font-body);
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--text-primary); transition: border-color 0.4s;
+      outline: none; border-radius: 0;
+    }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--text-muted); }
+    .form-field textarea { min-height: 100px; resize: none; }
+    .form-submit {
+      align-self: flex-start; padding: 12px 36px;
+      font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+      border: 1px solid var(--text-muted);
+      color: var(--text-muted); font-weight: 300; transition: all 0.4s;
+    }
+    .form-submit:hover { border-color: var(--text-primary); color: var(--text-primary); }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 48px var(--page-pad);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.6rem; color: var(--text-muted);
+      letter-spacing: 0.15em; font-weight: 300;
     }
 
-    /* FOOTER */
-    .footer { padding: 60px 0; border-top: 1px solid var(--border); transition: border-color 0.5s ease; }
-    .footer-inner {
-      max-width: 1120px; margin: 0 auto; padding: 0 48px;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+    /* ─── Lightbox ─── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 960;
+      background: rgba(6, 5, 4, 0.96);
+      display: flex; align-items: center; justify-content: center;
+      cursor: zoom-out;
     }
-    .footer-left { display: flex; flex-direction: column; gap: 4px; }
-    .footer-name {
-      font-family: var(--font-heading); font-weight: var(--heading-weight);
-      font-size: 16px; color: var(--text); transition: color 0.5s ease;
+    .lightbox img {
+      max-width: 88vw; max-height: 88vh; object-fit: contain;
+      animation: lbFade 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .footer-copy { font-size: 13px; color: var(--text-secondary); transition: color 0.5s ease; }
-    .footer-contact { display: flex; gap: 32px; flex-wrap: wrap; }
-    .footer-link {
-      font-size: 14px; color: var(--text-secondary); text-decoration: none;
-      transition: color 0.25s ease; display: inline-flex; align-items: center;
+    @keyframes lbFade {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
     }
-    .footer-link:hover { color: var(--accent); }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 28px;
+      font-size: 1.2rem; color: var(--text-muted); transition: color 0.3s;
+    }
+    .lightbox-close:hover { color: var(--text-primary); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--text-muted); cursor: pointer; transition: color 0.3s;
+    }
+    .lightbox-nav:hover { color: var(--text-primary); }
+    .lightbox-nav.prev { left: 20px; }
+    .lightbox-nav.next { right: 20px; }
 
-    /* ANIMATIONS */
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+    /* ─── Scroll Reveal ─── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
 
-    /* RESPONSIVE */
+    /* ─── Tweaks Panel ─── */
+    .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+      max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+      transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+      background:rgba(250,249,247,.78);color:#29261b;
+      -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+      border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+      box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+      font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+    .twk-hd{display:flex;align-items:center;justify-content:space-between;
+      padding:10px 8px 10px 14px;cursor:move;user-select:none}
+    .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+    .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+      width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+    .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+    .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+      overflow-y:auto;overflow-x:hidden;min-height:0;
+      scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+    .twk-row{display:flex;flex-direction:column;gap:5px}
+    .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+    .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;color:rgba(41,38,27,.72)}
+    .twk-lbl>span:first-child{font-weight:500}
+    .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+      color:rgba(41,38,27,.45);padding:10px 0 0}
+    .twk-sect:first-child{padding-top:0}
+    .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+      background:rgba(0,0,0,.06);user-select:none}
+    .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+      background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+      transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+    .twk-seg.dragging .twk-seg-thumb{transition:none}
+    .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+      background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+      border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2}
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      :root { --masonry-cols: 3; }
+      .works-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .sales-featured { grid-template-columns: 1fr; }
+      .sales-grid { grid-template-columns: repeat(2, 1fr); }
+      .fnb-grid { grid-template-columns: repeat(3, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .newsletter-grid { grid-template-columns: repeat(2, 1fr); }
+      .dash-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 768px) {
-      .nav { padding: 0 24px; }
-      .nav-links { gap: 20px; }
-      .hero { padding: 80px 24px 40px; }
-      .section-inner { padding: 0 24px; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
-      .video-grid { grid-template-columns: 1fr; }
-      .timeline { padding-left: 28px; }
-      .timeline-dot { left: -28px; }
-      .timeline-card { padding: 20px; }
-      .footer-inner { padding: 0 24px; }
-      .theme-switcher { bottom: 16px; right: 16px; }
+      :root { --masonry-cols: 2; --grid-gap: 2px; }
+      .fnb-grid { grid-template-columns: repeat(2, 1fr); }
+      .fnb-card.large { grid-column: span 2; grid-row: span 1; }
+      .sales-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+      .social-grid { grid-template-columns: repeat(2, 1fr); }
+      .reader-book { width: 92vw; }
     }
     @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: 1fr !important; }
-      .nav-links { display: none; }
+      :root { --masonry-cols: 2; }
+      .newsletter-grid { grid-template-columns: 1fr; }
     }
   </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="root"></div>
 
-  <!-- แก้ไขผลงาน รูปภาพ และวิดีโอ ที่ไฟล์ content.js -->
-  <script src="content.js"></script>
+  <!-- ════════════════════════════════════════════════════════════
+       CONTENT — แก้ไขส่วนนี้เพื่ออัปเดตข้อมูลทั้งหมด
 
-  <script type="text/babel">
-    // ── DATA ──────────────────────────────────────────────────────────────────
-
-    const THEMES = {
-      appleMinimal: {
-        name: 'Apple Minimal',
-        vars: {
-          '--font-body': '-apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
-          '--font-heading': '-apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
-          '--heading-weight': '700',
-          '--bg': '#ffffff', '--bg-alt': '#f5f5f7', '--text': '#1d1d1f',
-          '--text-secondary': '#86868b', '--accent': '#1d1d1f', '--border': '#d2d2d7',
-          '--card': '#f5f5f7', '--nav-bg': 'rgba(255,255,255,0.72)',
-          '--radius': '18px', '--hero-size': 'clamp(48px, 8vw, 88px)',
-          '--hero-align': 'center', '--hero-items': 'center',
-          '--section-gap': '120px', '--gallery-cols': '3',
-        },
-      },
-      warmEditorial: {
-        name: 'Warm Editorial',
-        vars: {
-          '--font-body': '"DM Sans", sans-serif',
-          '--font-heading': '"DM Serif Display", serif',
-          '--heading-weight': '400',
-          '--bg': '#faf8f5', '--bg-alt': '#f0ece4', '--text': '#2c2825',
-          '--text-secondary': '#8a8279', '--accent': '#8a7054', '--border': '#e0dbd3',
-          '--card': '#f0ece4', '--nav-bg': 'rgba(250,248,245,0.85)',
-          '--radius': '8px', '--hero-size': 'clamp(44px, 7vw, 76px)',
-          '--hero-align': 'left', '--hero-items': 'flex-start',
-          '--section-gap': '100px', '--gallery-cols': '3',
-        },
-      },
-      coolStudio: {
-        name: 'Cool Studio',
-        vars: {
-          '--font-body': '"Space Grotesk", sans-serif',
-          '--font-heading': '"Space Grotesk", sans-serif',
-          '--heading-weight': '600',
-          '--bg': '#f5f7fa', '--bg-alt': '#e8ecf2', '--text': '#1a1e2e',
-          '--text-secondary': '#6b7280', '--accent': '#4361ee', '--border': '#d5dbe5',
-          '--card': '#e8ecf2', '--nav-bg': 'rgba(245,247,250,0.82)',
-          '--radius': '14px', '--hero-size': 'clamp(44px, 7vw, 72px)',
-          '--hero-align': 'center', '--hero-items': 'center',
-          '--section-gap': '100px', '--gallery-cols': '4',
-        },
-      },
-      inkPaper: {
-        name: 'Ink & Paper',
-        vars: {
-          '--font-body': '"Syne", sans-serif',
-          '--font-heading': '"Syne", sans-serif',
-          '--heading-weight': '800',
-          '--bg': '#ffffff', '--bg-alt': '#f0f0f0', '--text': '#000000',
-          '--text-secondary': '#555555', '--accent': '#000000', '--border': '#e0e0e0',
-          '--card': '#f0f0f0', '--nav-bg': 'rgba(255,255,255,0.92)',
-          '--radius': '0px', '--hero-size': 'clamp(52px, 9vw, 100px)',
-          '--hero-align': 'left', '--hero-items': 'flex-start',
-          '--section-gap': '140px', '--gallery-cols': '3',
-        },
-      },
+       วิธีใส่รูป:  img: 'images/ชื่อไฟล์.jpg'
+       วิธีใส่วิดีโอ: vimeoId: '1234567'  (เลขท้าย URL vimeo.com/1234567)
+       วิธีเพิ่มรายการ: copy block แล้ว paste ต่อ เพิ่ม id ถัดไป
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    var SITE_CONFIG = {
+      name:       "Chet Mutaphon",
+      title:      "Creative Director & Visual Storyteller",
+      tagline:    "Crafting cinematic brand experiences through design, photography, and strategic visual communication",
+      email:      "chet.mutaphon@gmail.com",
+      linkedin:   "https://www.linkedin.com/in/chet-mutaphon-84b5ab175",
+      experience: "5+",
+      location:   "Phuket, Thailand"
     };
 
-    function applyTheme(key) {
-      const t = THEMES[key];
-      if (!t) return;
-      Object.entries(t.vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+    var NAV_ITEMS = [
+      { id: "home",       label: "Home" },
+      { id: "about",      label: "About" },
+      { id: "works",      label: "Selected Works" },
+      { id: "photo",      label: "Photo" },
+      { id: "video",      label: "Video" },
+      { id: "fnb",        label: "F&B Promotions" },
+      { id: "sales",      label: "Sales & Packages" },
+      { id: "social",     label: "Social Content" },
+      { id: "dashboard",  label: "Dashboard" },
+      { id: "newsletter", label: "Newsletter" },
+      { id: "contact",    label: "Contact" }
+    ];
+
+    var ABOUT_DATA = {
+      bio: "With over five years of experience in hospitality marketing, brand design, and visual storytelling, I bring a cinematic eye to every project. My work spans luxury resort campaigns, editorial photography, food & beverage branding, and digital content strategy.",
+      experience: [
+        { role: "Marketing Executive & Graphic Designer",      company: "Renaissance Phuket Resort and Spa", period: "2025 — Present" },
+        { role: "Barista Manager & Brand Marketing Specialist", company: "NAP's Coffee Roaster Ubon",         period: "2019 — 2025"   }
+      ],
+      skills: [
+        "Brand Design", "Art Direction", "Photography", "Videography",
+        "UI/UX Design", "Social Media Strategy", "Campaign Design", "Editorial Layout"
+      ]
+    };
+
+    // Placeholder generator (ใช้แทนรูปที่ยังไม่มี — ลบทิ้งเมื่อใส่รูปจริง)
+    function makePlaceholder(w, h, label, hue) {
+      hue = hue || 30;
+      var bg = 'oklch(0.14 0.015 ' + hue + ')', fg = 'oklch(0.35 0.02 ' + hue + ')', stripe = 'oklch(0.16 0.015 ' + hue + ')';
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '"><rect fill="' + bg + '" width="' + w + '" height="' + h + '"/><defs><pattern id="s" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="20" stroke="' + stripe + '" stroke-width="1"/></pattern></defs><rect fill="url(#s)" width="' + w + '" height="' + h + '" opacity="0.4"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="monospace" font-size="' + (Math.min(w,h)*0.05) + '" fill="' + fg + '" opacity="0.6">' + label + '</text></svg>';
+      return 'data:image/svg+xml,' + encodeURIComponent(svg);
     }
 
-    const SKILLS = [
-      'Graphic Design', 'Photography', 'Videography', 'Content Writer',
-      'Social Media Management', 'Adobe Creative Suite', 'Content Creation',
-      'Brand Development', 'Art Direction', 'Generative AI', 'Print Design', 'Analytics',
+    // ── Selected Works (4:3) ──────────────────────────────────────────────────
+    var SELECTED_WORKS = [
+      { id: 1, title: "Renaissance Phuket — Brand Campaign 2025", category: "Brand Design",   img: makePlaceholder(800, 600, "Resort Campaign", 30) },
+      { id: 2, title: "NAP's Coffee — Visual Identity",           category: "Brand Identity", img: makePlaceholder(800, 600, "Coffee Brand", 35) },
+      { id: 3, title: "Sunset Sessions — Event Series",           category: "Event Design",   img: makePlaceholder(800, 600, "Event Poster", 25) },
+      { id: 4, title: "Andaman Wellness Retreat",                 category: "Campaign",       img: makePlaceholder(800, 600, "Wellness Campaign", 20) },
+      { id: 5, title: "Phuket Culinary Festival",                 category: "Art Direction",  img: makePlaceholder(800, 600, "Culinary Festival", 40) },
+      { id: 6, title: "Marriott Bonvoy — Member Exclusives",      category: "Digital Design", img: makePlaceholder(800, 600, "Loyalty Program", 28) }
+      // ↑ เพิ่ม: { id: 7, title: "...", category: "...", img: 'images/...' },
     ];
 
-    const EXPERIENCES = [
-      {
-        role: 'Marketing Executive & Graphic Designer',
-        company: 'Renaissance Phuket Resort and Spa',
-        period: '2025 — Present',
-        desc: 'Design in-house promotional artworks for digital and print collaterals including menus, signages, and festive materials. Produce video content, food & beverage photography, and manage social media content ensuring alignment with Marriott brand standards.',
-      },
-      {
-        role: 'Barista Manager & Brand Marketing Specialist',
-        company: "NAP's Coffee Roaster Ubon",
-        period: '2019 — 2025',
-        desc: 'Developed and executed digital marketing strategies across social media and e-commerce platforms. Designed packaging and created visual campaigns aligned with brand identity. Managed Shopee storefront and enhanced customer experience, driving online growth. Planned and optimized paid media campaigns on Facebook & Instagram. Collaborated with the founder on product launches, brand positioning, and overall marketing direction.',
-      },
+    // ── Photography (3:4 portrait) ────────────────────────────────────────────
+    var PHOTO_ITEMS = [
+      { id:  1, title: "Artwork I",            category: "Editorial", img: 'images/AW1.jpg' },
+      { id:  2, title: "Artwork II",           category: "Editorial", img: 'images/AW2.jpg' },
+      { id:  3, title: "Artwork III",          category: "Editorial", img: 'images/AW3.jpg' },
+      { id:  4, title: "Artwork IV",           category: "Editorial", img: 'images/AW4.jpg' },
+      { id:  5, title: "Artwork V",            category: "Editorial", img: 'images/AW5.jpg' },
+      { id:  6, title: "Artwork VI",           category: "Editorial", img: 'images/AW6.jpg' },
+      { id:  7, title: "Golden Hour Pool",     category: "Resort",    img: makePlaceholder(600, 800, "Resort Pool", 30) },
+      { id:  8, title: "Signature Cocktail",   category: "F&B",       img: makePlaceholder(600, 800, "Cocktail Shot", 25) },
+      { id:  9, title: "Beachfront Dining",    category: "Event",     img: makePlaceholder(600, 800, "Beach Dining", 35) },
+      { id: 10, title: "Spa Interior",         category: "Resort",    img: makePlaceholder(600, 800, "Spa Room", 20) },
+      { id: 11, title: "Thai Cuisine Plating", category: "F&B",       img: makePlaceholder(600, 800, "Thai Dish", 32) },
+      { id: 12, title: "Lobby Architecture",   category: "Resort",    img: makePlaceholder(600, 800, "Hotel Lobby", 28) }
+      // ↑ เพิ่ม: { id: 13, title: "...", category: "...", img: 'images/...' },
     ];
 
-    // ── HOOKS ─────────────────────────────────────────────────────────────────
+    // ── Video — vimeoId จาก vimeo.com/XXXXXXX ────────────────────────────────
+    var VIDEO_ITEMS = [
+      { id: 1, title: "Resort Experience Film",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Resort Film", 30),   vimeoId: "" },
+      { id: 2, title: "Cocktail Making Reel",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Cocktail Reel", 25), vimeoId: "" },
+      { id: 3, title: "Spa Journey",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "Spa Film", 20),      vimeoId: "" },
+      { id: 4, title: "Chef's Table Experience", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Chef Table", 35),   vimeoId: "" },
+      { id: 5, title: "Sunset Pool Party",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Pool Party", 15),   vimeoId: "" },
+      { id: 6, title: "Room Tour — Ocean Suite", category: "Resort",  thumbnail: makePlaceholder(360, 640, "Room Tour", 28),    vimeoId: "" },
+      { id: 7, title: "Lifestyle Reel",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "Lifestyle", 32),    vimeoId: "" }
+      // ↑ เพิ่ม: { id: 8, title: "...", category: "...", thumbnail: 'images/...', vimeoId: "1234567" },
+    ];
 
-    function useScrollReveal(threshold = 0.08) {
+    // ── F&B Promotions ────────────────────────────────────────────────────────
+    var FNB_ITEMS = [
+      { id: 1, title: "The Trinity Burger — Premium Wagyu", category: "Sand Box", size: "large",  ratio: "4/5", img: 'images/fnb-trinity-burger.jpg' },
+      { id: 2, title: "Chef's Selection Set — Takieng",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'images/fnb-chefs-selection.jpg' },
+      { id: 3, title: "Tartare Selection",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'images/fnb-tartare-selection.jpg' },
+      { id: 4, title: "Pink Paradise Cocktail",             category: "Bar",      size: "medium", ratio: "4/5", img: 'images/fnb-pink-paradise.jpg' },
+      { id: 5, title: "Afternoon Tea Collection",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Afternoon Tea", 32) },
+      { id: 6, title: "Pool Bar Happy Hour",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "Happy Hour", 28) },
+      { id: 7, title: "Thai Street Food Night",             category: "Event",    size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Street Food", 38) },
+      { id: 8, title: "Beachfront BBQ",                     category: "Event",    size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "BBQ Night", 18) }
+      // ↑ เพิ่ม: { id: 9, title: "...", category: "...", size: "small", ratio: "4/5", img: 'images/...' },
+    ];
+
+    // ── Sales & Packages ──────────────────────────────────────────────────────
+    var SALES_ITEMS = [
+      { id: 1, title: "Honeymoon Paradise Package",     category: "Romance",  featured: true,  img: makePlaceholder(800, 600, "Honeymoon Package", 25) },
+      { id: 2, title: "Wellness Retreat — 5 Days",      category: "Spa",      featured: false, img: makePlaceholder(800, 600, "Wellness Retreat", 20) },
+      { id: 3, title: "Family Fun Summer",              category: "Family",   featured: false, img: makePlaceholder(800, 600, "Family Package", 35) },
+      { id: 4, title: "Wedding by the Sea",             category: "Wedding",  featured: true,  img: makePlaceholder(800, 600, "Wedding Package", 18) },
+      { id: 5, title: "Festive Season Celebration",     category: "Seasonal", featured: false, img: makePlaceholder(800, 600, "Festive Offer", 30) },
+      { id: 6, title: "Bonvoy Member Exclusive Stay",   category: "Loyalty",  featured: false, img: makePlaceholder(800, 600, "Member Exclusive", 28) },
+      { id: 7, title: "Long Stay — Work from Paradise", category: "Extended", featured: true,  img: makePlaceholder(800, 600, "Long Stay", 22) },
+      { id: 8, title: "Spa Day Pass",                   category: "Spa",      featured: false, img: makePlaceholder(800, 600, "Spa Day", 15) }
+      // ↑ เพิ่ม: { id: 9, title: "...", category: "...", featured: false, img: 'images/...' },
+    ];
+
+    // ── Social Media Content ──────────────────────────────────────────────────
+    var SOCIAL_ITEMS = [
+      { id: 1, title: "Resort Highlights Reel",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
+      { id: 2, title: "Behind the Scenes — Kitchen",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
+      { id: 3, title: "Guest Experience Stories",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
+      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
+      { id: 5, title: "Coffee Art Process",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
+      { id: 6, title: "New Menu Launch",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
+      { id: 7, title: "Sunset Timelapse",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
+      { id: 8, title: "Room Reveal — Suite Tour",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
+      // ↑ เพิ่ม: { id: 9, title: "...", type: "reel", thumbnail: 'images/...' },
+    ];
+
+    // ── Dashboard & Case Studies ──────────────────────────────────────────────
+    var DASHBOARD_ITEMS = [
+      { id: 1, title: "Social Media Analytics Dashboard", category: "Analytics", img: makePlaceholder(800, 600, "Social Analytics", 30) },
+      { id: 2, title: "Campaign Performance Report",      category: "Strategy",  img: makePlaceholder(800, 600, "Campaign Report", 25) },
+      { id: 3, title: "Brand Guidelines System",          category: "Branding",  img: makePlaceholder(800, 600, "Brand Guide", 35) },
+      { id: 4, title: "Email Marketing Dashboard",        category: "Analytics", img: makePlaceholder(800, 600, "Email Dashboard", 20) },
+      { id: 5, title: "Content Calendar UI",              category: "Strategy",  img: makePlaceholder(800, 600, "Content Calendar", 28) },
+      { id: 6, title: "Revenue Presentation Deck",        category: "Strategy",  img: makePlaceholder(800, 600, "Revenue Deck", 22) }
+      // ↑ เพิ่ม: { id: 7, title: "...", category: "...", img: 'images/...' },
+    ];
+
+    // ── Newsletter Archive ────────────────────────────────────────────────────
+    var NEWSLETTER_ITEMS = [
+      { id: 1, title: "The Renaissance Review — Issue 12", date: "March 2026",    pages: 16, cover: makePlaceholder(400, 560, "Issue 12", 30) },
+      { id: 2, title: "The Renaissance Review — Issue 11", date: "February 2026", pages: 14, cover: makePlaceholder(400, 560, "Issue 11", 25) },
+      { id: 3, title: "The Renaissance Review — Issue 10", date: "January 2026",  pages: 12, cover: makePlaceholder(400, 560, "Issue 10", 35) },
+      { id: 4, title: "NAP's Monthly — Final Edition",     date: "December 2024", pages: 10, cover: makePlaceholder(400, 560, "NAPs Final", 38) },
+      { id: 5, title: "The Renaissance Review — Issue 09", date: "December 2025", pages: 14, cover: makePlaceholder(400, 560, "Issue 09", 20) },
+      { id: 6, title: "The Renaissance Review — Issue 08", date: "November 2025", pages: 12, cover: makePlaceholder(400, 560, "Issue 08", 28) }
+      // ↑ เพิ่ม: { id: 7, title: "...", date: "...", pages: 12, cover: 'images/...' },
+    ];
+  </script>
+
+  <!-- ─── Tweaks panel (design controls, hidden by default) ─── -->
+  <script type="text/babel">
+    function useTweaks(defaults) {
+      const [values, setValues] = React.useState(defaults);
+      const setTweak = React.useCallback((keyOrEdits, val) => {
+        const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+          ? keyOrEdits : { [keyOrEdits]: val };
+        setValues((prev) => ({ ...prev, ...edits }));
+        window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+        window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+      }, []);
+      return [values, setTweak];
+    }
+
+    function TweaksPanel({ title = 'Tweaks', children }) {
+      const [open, setOpen] = React.useState(false);
+      const dragRef = React.useRef(null);
+      const offsetRef = React.useRef({ x: 16, y: 16 });
+      const PAD = 16;
+
+      const clampToViewport = React.useCallback(() => {
+        const panel = dragRef.current;
+        if (!panel) return;
+        const w = panel.offsetWidth, h = panel.offsetHeight;
+        const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+        const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+        offsetRef.current = {
+          x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+          y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+        };
+        panel.style.right = offsetRef.current.x + 'px';
+        panel.style.bottom = offsetRef.current.y + 'px';
+      }, []);
+
+      React.useEffect(() => {
+        const onMsg = (e) => {
+          const t = e?.data?.type;
+          if (t === '__activate_edit_mode') setOpen(true);
+          else if (t === '__deactivate_edit_mode') setOpen(false);
+        };
+        window.addEventListener('message', onMsg);
+        window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+        return () => window.removeEventListener('message', onMsg);
+      }, []);
+
+      const dismiss = () => {
+        setOpen(false);
+        window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+      };
+
+      const onDragStart = (e) => {
+        const panel = dragRef.current;
+        if (!panel) return;
+        const r = panel.getBoundingClientRect();
+        const sx = e.clientX, sy = e.clientY;
+        const startRight = window.innerWidth - r.right;
+        const startBottom = window.innerHeight - r.bottom;
+        const move = (ev) => {
+          offsetRef.current = {
+            x: startRight - (ev.clientX - sx),
+            y: startBottom - (ev.clientY - sy),
+          };
+          clampToViewport();
+        };
+        const up = () => {
+          window.removeEventListener('mousemove', move);
+          window.removeEventListener('mouseup', up);
+        };
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+      };
+
+      if (!open) return null;
+      return (
+        <div ref={dragRef} className="twk-panel" style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+          <div className="twk-hd" onMouseDown={onDragStart}>
+            <b>{title}</b>
+            <button className="twk-x" onMouseDown={(e) => e.stopPropagation()} onClick={dismiss}>✕</button>
+          </div>
+          <div className="twk-body">{children}</div>
+        </div>
+      );
+    }
+
+    function TweakSection({ label, children }) {
+      return (
+        <>
+          <div className="twk-sect">{label}</div>
+          {children}
+        </>
+      );
+    }
+
+    function TweakRadio({ label, value, options, onChange }) {
+      const trackRef = React.useRef(null);
+      const [dragging, setDragging] = React.useState(false);
+      const valueRef = React.useRef(value);
+      valueRef.current = value;
+      const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+      const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+      const n = opts.length;
+
+      const segAt = (clientX) => {
+        const r = trackRef.current.getBoundingClientRect();
+        const inner = r.width - 4;
+        const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+        return opts[Math.max(0, Math.min(n - 1, i))].value;
+      };
+
+      const onPointerDown = (e) => {
+        setDragging(true);
+        const v0 = segAt(e.clientX);
+        if (v0 !== valueRef.current) onChange(v0);
+        const move = (ev) => {
+          if (!trackRef.current) return;
+          const v = segAt(ev.clientX);
+          if (v !== valueRef.current) onChange(v);
+        };
+        const up = () => {
+          setDragging(false);
+          window.removeEventListener('pointermove', move);
+          window.removeEventListener('pointerup', up);
+        };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+      };
+
+      return (
+        <div className="twk-row">
+          <div className="twk-lbl"><span>{label}</span></div>
+          <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+               className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+            <div className="twk-seg-thumb"
+                 style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`, width: `calc((100% - 4px) / ${n})` }} />
+            {opts.map((o) => (
+              <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>{o.label}</button>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    window.useTweaks = useTweaks;
+    window.TweaksPanel = TweaksPanel;
+    window.TweakSection = TweakSection;
+    window.TweakRadio = TweakRadio;
+  </script>
+
+  <!-- ─── Layout components: NavBar, MenuOverlay, Lightbox, ScrollReveal, Footer ─── -->
+  <script type="text/babel">
+    function ScrollReveal({ children, className, delay }) {
       const ref = React.useRef(null);
       const [visible, setVisible] = React.useState(false);
+
       React.useEffect(() => {
         const el = ref.current;
         if (!el) return;
         const obs = new IntersectionObserver(
           ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.unobserve(el); } },
-          { threshold, rootMargin: '0px 0px -40px 0px' }
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
         );
         obs.observe(el);
         return () => obs.disconnect();
       }, []);
-      return [ref, visible];
-    }
 
-    function ScrollReveal({ children, delay = 0, className = '', style = {} }) {
-      const [ref, visible] = useScrollReveal();
+      const delayClass = delay ? ' reveal-delay-' + delay : '';
       return (
-        <div ref={ref} className={className} style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(36px)',
-          transition: `opacity 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
-          willChange: 'opacity, transform', ...style,
-        }}>
+        <div ref={ref} className={'reveal' + (visible ? ' visible' : '') + delayClass + (className ? ' ' + className : '')}>
           {children}
         </div>
       );
     }
 
-    function useActiveSection(ids) {
-      const [active, setActive] = React.useState('');
+    function NavBar({ activeSection, onMenuToggle, menuOpen }) {
+      const [scrolled, setScrolled] = React.useState(false);
+
       React.useEffect(() => {
-        const observers = ids.map(id => {
-          const el = document.getElementById(id);
-          if (!el) return null;
-          const obs = new IntersectionObserver(
-            ([e]) => { if (e.isIntersecting) setActive(id); },
-            { threshold: 0.25, rootMargin: '-80px 0px -40% 0px' }
-          );
-          obs.observe(el);
-          return obs;
-        });
-        return () => observers.forEach(o => o?.disconnect());
+        const onScroll = () => setScrolled(window.scrollY > 60);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
       }, []);
-      return active;
+
+      return (
+        <header className={'nav-bar' + (scrolled ? ' scrolled' : '')}>
+          <a href="#home" className="nav-logo">Chet Mutaphon</a>
+          <button className={'nav-burger' + (menuOpen ? ' open' : '')} onClick={onMenuToggle} aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </header>
+      );
     }
 
-    // ── LOADING SCREEN ────────────────────────────────────────────────────────
-
-    function LoadingScreen({ onDone }) {
-      const [phase, setPhase] = React.useState(0);
-      React.useEffect(() => {
-        const t1 = setTimeout(() => setPhase(1), 100);
-        const t2 = setTimeout(() => setPhase(2), 1600);
-        const t3 = setTimeout(onDone, 2200);
-        return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-      }, []);
+    function MenuOverlay({ open, activeSection, onClose }) {
       return (
-        <div style={{
-          position: 'fixed', inset: 0, zIndex: 9999, background: 'var(--bg)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexDirection: 'column', gap: 16,
-          opacity: phase >= 2 ? 0 : 1,
-          transition: 'opacity 0.6s cubic-bezier(0.22,1,0.36,1)',
-          pointerEvents: phase >= 2 ? 'none' : 'auto',
-        }}>
-          <div style={{
-            fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)',
-            fontSize: 56, color: 'var(--text)', letterSpacing: '-0.04em',
-            opacity: phase >= 1 ? 1 : 0,
-            transform: phase >= 1 ? 'translateY(0)' : 'translateY(16px)',
-            transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1)',
-          }}>CM</div>
-          <div style={{
-            width: 48, height: 2, borderRadius: 1, background: 'var(--accent)',
-            opacity: phase >= 1 ? 0.4 : 0,
-            transform: phase >= 1 ? 'scaleX(1)' : 'scaleX(0)',
-            transition: 'all 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s',
-          }} />
+        <div className={'menu-overlay' + (open ? ' open' : '')}>
+          <nav>
+            {window.NAV_ITEMS.map(function(item) {
+              return (
+                <a key={item.id} href={'#' + item.id}
+                  className={'menu-link' + (activeSection === item.id ? ' active' : '')}
+                  onClick={onClose}>
+                  {item.label}
+                </a>
+              );
+            })}
+          </nav>
         </div>
       );
     }
 
-    // ── SCROLL PROGRESS ───────────────────────────────────────────────────────
+    function SectionHeader({ title }) {
+      return (
+        <ScrollReveal>
+          <div className="section-header">
+            <h2 className="section-title">{title}</h2>
+          </div>
+        </ScrollReveal>
+      );
+    }
 
-    function ScrollProgress() {
-      const [w, setW] = React.useState(0);
+    function Lightbox({ images, currentIndex, onClose, onNav }) {
       React.useEffect(() => {
-        const fn = () => {
-          const max = document.documentElement.scrollHeight - window.innerHeight;
-          setW(max > 0 ? (window.scrollY / max) * 100 : 0);
-        };
-        window.addEventListener('scroll', fn, { passive: true });
-        return () => window.removeEventListener('scroll', fn);
-      }, []);
-      return <div className="scroll-progress" style={{ width: `${w}%` }} />;
-    }
+        function onKey(e) {
+          if (e.key === 'Escape') onClose();
+          if (e.key === 'ArrowRight') onNav(1);
+          if (e.key === 'ArrowLeft') onNav(-1);
+        }
+        window.addEventListener('keydown', onKey);
+        document.body.style.overflow = 'hidden';
+        return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+      }, [onClose, onNav]);
 
-    // ── NAVIGATION ────────────────────────────────────────────────────────────
-
-    function Navigation({ active }) {
-      const [scrolled, setScrolled] = React.useState(false);
-      React.useEffect(() => {
-        const fn = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', fn, { passive: true });
-        return () => window.removeEventListener('scroll', fn);
-      }, []);
-
-      const goTo = (id) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const y = el.getBoundingClientRect().top + window.scrollY - 72;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      };
-
-      const links = [
-        { id: 'about', label: 'About' },
-        { id: 'experience', label: 'Experience' },
-        { id: 'artwork', label: 'Artwork' },
-        { id: 'photography', label: 'Photo' },
-        { id: 'videos', label: 'Video' },
-        { id: 'dashboard', label: 'Dashboard' },
-      ];
-
+      if (currentIndex < 0 || !images.length) return null;
       return (
-        <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-          <a className="nav-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            Chet Mutaphon
-          </a>
-          <div className="nav-links">
-            {links.map(l => (
-              <a key={l.id}
-                className={`nav-link ${active === l.id ? 'nav-link--active' : ''}`}
-                onClick={() => goTo(l.id)}>
-                {l.label}
-              </a>
-            ))}
-          </div>
-        </nav>
-      );
-    }
-
-    // ── HERO ──────────────────────────────────────────────────────────────────
-
-    function HeroSection() {
-      const [show, setShow] = React.useState(false);
-      React.useEffect(() => { setTimeout(() => setShow(true), 300); }, []);
-      return (
-        <section className="hero" id="hero">
-          <div className="hero-content" style={{
-            opacity: show ? 1 : 0,
-            transform: show ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.9s cubic-bezier(0.22,1,0.36,1)',
-          }}>
-            <h1 className="hero-name">Chet Mutaphon</h1>
-            <p className="hero-title">Marketing Executive &amp; Graphic Designer</p>
-            <p className="hero-tagline">Crafting visual stories that connect brands with people.</p>
-          </div>
-          <div className="scroll-hint" style={{ opacity: show ? 1 : 0, transition: 'opacity 1.2s ease 0.8s' }}>
-            <div className="scroll-hint-line" />
-          </div>
-        </section>
-      );
-    }
-
-    // ── ABOUT & SKILLS ────────────────────────────────────────────────────────
-
-    function AboutSkillsSection() {
-      return (
-        <section className="section section--alt" id="about">
-          <div className="section-inner">
-            <ScrollReveal>
-              <p className="section-label">About</p>
-              <h2 className="section-title">A creative at the intersection<br />of design and marketing.</h2>
-            </ScrollReveal>
-            <ScrollReveal delay={0.1}>
-              <p className="about-text">
-                With over 5 years of experience spanning graphic design, photography, videography, and marketing
-                strategy, I bring a multidisciplinary approach to every project. From crafting brand identities to
-                directing video content and analyzing campaign performance — I believe great design drives great results.
-              </p>
-            </ScrollReveal>
-            <ScrollReveal delay={0.2}>
-              <div className="skills-grid">
-                {SKILLS.map((s, i) => <span key={i} className="skill-tag">{s}</span>)}
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
-      );
-    }
-
-    // ── EXPERIENCE ────────────────────────────────────────────────────────────
-
-    function ExperienceSection() {
-      return (
-        <section className="section" id="experience">
-          <div className="section-inner">
-            <ScrollReveal>
-              <p className="section-label">Experience</p>
-              <h2 className="section-title">Where I've worked.</h2>
-            </ScrollReveal>
-            <div className="timeline">
-              {EXPERIENCES.map((exp, i) => (
-                <ScrollReveal key={i} delay={i * 0.12}>
-                  <div className="timeline-item">
-                    <div className="timeline-dot" />
-                    <div className="timeline-card">
-                      <div className="timeline-header">
-                        <h3 className="timeline-role">{exp.role}</h3>
-                        <span className="timeline-period">{exp.period}</span>
-                      </div>
-                      <p className="timeline-company">{exp.company}</p>
-                      <p className="timeline-desc">{exp.desc}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    // ── PORTFOLIO GRID + LIGHTBOX ─────────────────────────────────────────────
-
-    function PortfolioGrid({ items, aspectRatio = '4/3' }) {
-      const [lightbox, setLightbox] = React.useState(null);
-      React.useEffect(() => {
-        if (!lightbox) return;
-        const fn = (e) => { if (e.key === 'Escape') setLightbox(null); };
-        window.addEventListener('keydown', fn);
-        return () => window.removeEventListener('keydown', fn);
-      }, [lightbox]);
-
-      return (
-        <>
-          <div className="gallery-grid">
-            {items.map((item, i) => (
-              <ScrollReveal key={item.id} delay={i * 0.08}>
-                <div className="gallery-card" onClick={() => setLightbox(item)}>
-                  <div className="gallery-placeholder" style={{
-                    aspectRatio,
-                    background: item.img ? 'var(--card)' : `repeating-linear-gradient(-45deg, transparent, transparent 10px, hsl(${item.hue}, 25%, 88%) 10px, hsl(${item.hue}, 25%, 88%) 20px), var(--card)`,
-                  }}>
-                    {item.img
-                      ? <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                      : <><span className="placeholder-label">{item.label}</span><span className="placeholder-hint">drop image here</span></>
-                    }
-                  </div>
-                  <div className="gallery-overlay">
-                    <span className="gallery-overlay-title">{item.title}</span>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          {lightbox && (
-            <div className="modal-overlay" onClick={() => setLightbox(null)}>
-              <button className="modal-close" onClick={() => setLightbox(null)}>✕</button>
-              <div className="lightbox-content" onClick={e => e.stopPropagation()}>
-                <div className="lightbox-image" style={{
-                  aspectRatio,
-                  background: lightbox.img ? '#000' : `repeating-linear-gradient(-45deg, transparent, transparent 14px, hsl(${lightbox.hue}, 25%, 86%) 14px, hsl(${lightbox.hue}, 25%, 86%) 28px), var(--card)`,
-                }}>
-                  {lightbox.img
-                    ? <img src={lightbox.img} alt={lightbox.title} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-                    : <><span className="placeholder-label" style={{ fontSize: 16 }}>{lightbox.label}</span><span className="placeholder-hint">drop image here</span></>
-                  }
-                </div>
-                <div className="lightbox-info">
-                  <h3 className="lightbox-title">{lightbox.title}</h3>
-                </div>
-              </div>
-            </div>
+        <div className="lightbox" onClick={onClose}>
+          <button className="lightbox-close" onClick={onClose}>✕</button>
+          {images.length > 1 && (
+            <React.Fragment>
+              <button className="lightbox-nav prev" onClick={(e) => { e.stopPropagation(); onNav(-1); }}>‹</button>
+              <button className="lightbox-nav next" onClick={(e) => { e.stopPropagation(); onNav(1); }}>›</button>
+            </React.Fragment>
           )}
-        </>
+          <img src={images[currentIndex]} alt="" onClick={(e) => e.stopPropagation()} style={{ cursor: 'default' }} />
+        </div>
       );
     }
 
-    // ── ARTWORK ───────────────────────────────────────────────────────────────
-
-    function ArtworkSection() {
-      return (
-        <section className="section section--alt" id="artwork">
-          <div className="section-inner">
-            <ScrollReveal>
-              <p className="section-label">Artwork</p>
-              <h2 className="section-title">Design work.</h2>
-            </ScrollReveal>
-            <PortfolioGrid items={ARTWORK_ITEMS} />
-          </div>
-        </section>
-      );
-    }
-
-    // ── PHOTOGRAPHY ───────────────────────────────────────────────────────────
-
-    function PhotographySection() {
-      return (
-        <section className="section" id="photography">
-          <div className="section-inner">
-            <ScrollReveal>
-              <p className="section-label">Photography</p>
-              <h2 className="section-title">Through the lens.</h2>
-            </ScrollReveal>
-            <PortfolioGrid items={PHOTO_ITEMS} aspectRatio="3/2" />
-          </div>
-        </section>
-      );
-    }
-
-    // ── VIDEO ─────────────────────────────────────────────────────────────────
-
-    function VideoSection() {
-      const [modal, setModal] = React.useState(null);
-      React.useEffect(() => {
-        if (!modal) return;
-        const fn = (e) => { if (e.key === 'Escape') setModal(null); };
-        window.addEventListener('keydown', fn);
-        return () => window.removeEventListener('keydown', fn);
-      }, [modal]);
-
-      return (
-        <section className="section section--alt" id="videos">
-          <div className="section-inner">
-            <ScrollReveal>
-              <p className="section-label">Videographer</p>
-              <h2 className="section-title">Motion &amp; storytelling.</h2>
-            </ScrollReveal>
-            <div className="video-grid">
-              {VIDEO_ITEMS.map((v, i) => (
-                <ScrollReveal key={v.id} delay={i * 0.1}>
-                  <div className="video-card" onClick={() => setModal(v)}>
-                    <div className="video-thumb">
-                      <div className="video-play">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                          <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="2" opacity="0.8" />
-                          <path d="M20 16l12 8-12 8V16z" fill="currentColor" opacity="0.9" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="video-info">
-                      <h4 className="video-title">{v.title}</h4>
-                      <p className="video-desc">{v.desc}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-
-          {modal && (
-            <div className="modal-overlay modal-overlay--dark" onClick={() => setModal(null)}>
-              <button className="modal-close" onClick={() => setModal(null)}>✕</button>
-              <div className="video-modal" onClick={e => e.stopPropagation()}>
-                <div className="video-embed">
-                  <iframe
-                    src={`https://player.vimeo.com/video/${modal.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    style={{ width: '100%', height: '100%', border: 'none' }}
-                  />
-                </div>
-                <p className="video-modal-title">{modal.title}</p>
-              </div>
-            </div>
-          )}
-        </section>
-      );
-    }
-
-    // ── DASHBOARD ─────────────────────────────────────────────────────────────
-
-    function DashboardSection() {
-      return (
-        <section className="section" id="dashboard">
-          <div className="section-inner">
-            <ScrollReveal>
-              <p className="section-label">Marketing</p>
-              <h2 className="section-title">Dashboard &amp; analytics.</h2>
-            </ScrollReveal>
-            <PortfolioGrid items={DASHBOARD_ITEMS} aspectRatio="16/9" />
-          </div>
-        </section>
-      );
-    }
-
-    // ── FOOTER ────────────────────────────────────────────────────────────────
-
-    function FooterSection() {
+    function Footer() {
       return (
         <footer className="footer">
-          <ScrollReveal>
-            <div className="footer-inner">
-              <div className="footer-left">
-                <span className="footer-name">Chet Mutaphon</span>
-                <span className="footer-copy">© 2026 All rights reserved.</span>
-              </div>
-              <div className="footer-contact">
-                <a href="mailto:chet.mutaphon@gmail.com" className="footer-link">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginRight: 6, verticalAlign: '-2px' }}>
-                    <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                    <path d="M1 5l7 4 7-4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                  </svg>
-                  chet.mutaphon@gmail.com
-                </a>
-                <a href="https://www.linkedin.com/in/chet-mutaphon-84b5ab175" target="_blank" rel="noopener" className="footer-link">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style={{ marginRight: 6, verticalAlign: '-2px' }}>
-                    <path d="M13.6 1H2.4C1.63 1 1 1.63 1 2.4v11.2c0 .77.63 1.4 1.4 1.4h11.2c.77 0 1.4-.63 1.4-1.4V2.4c0-.77-.63-1.4-1.4-1.4zM5.3 13H3.2V6.5h2.1V13zM4.25 5.6c-.69 0-1.25-.56-1.25-1.25S3.56 3.1 4.25 3.1s1.25.56 1.25 1.25-.56 1.25-1.25 1.25zM13 13h-2.1V9.85c0-.75-.01-1.72-1.05-1.72-1.05 0-1.21.82-1.21 1.67V13H6.55V6.5h2.01v.89h.03c.28-.53.96-1.09 1.98-1.09 2.12 0 2.51 1.4 2.51 3.21V13z"/>
-                  </svg>
-                  LinkedIn
-                </a>
-              </div>
-            </div>
-          </ScrollReveal>
+          <span>© 2026 Chet Mutaphon</span>
+          <span>Creative Portfolio</span>
         </footer>
       );
     }
 
-    // ── THEME SWITCHER ────────────────────────────────────────────────────────
+    window.ScrollReveal = ScrollReveal;
+    window.NavBar = NavBar;
+    window.MenuOverlay = MenuOverlay;
+    window.SectionHeader = SectionHeader;
+    window.Lightbox = Lightbox;
+    window.Footer = Footer;
+  </script>
 
-    function ThemeSwitcher({ current, onChange }) {
-      const [open, setOpen] = React.useState(false);
+  <!-- ─── Hero + About sections ─── -->
+  <script type="text/babel">
+    function HeroSection() {
       return (
-        <div className="theme-switcher">
-          {open && (
-            <div className="theme-menu">
-              {Object.entries(THEMES).map(([key, t]) => (
-                <button key={key} className={`theme-btn ${current === key ? 'theme-btn--active' : ''}`}
-                  onClick={() => { onChange(key); setOpen(false); }}>
-                  {t.name}
-                </button>
-              ))}
-            </div>
-          )}
-          <button className="theme-toggle" onClick={() => setOpen(o => !o)} title="Switch theme">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </button>
-        </div>
+        <section className="hero" id="home">
+          <div className="hero-bg" style={{
+            backgroundImage: 'url(' + window.makePlaceholder(1920, 1080, 'featured project hero', 28) + ')'
+          }}></div>
+          <div className="hero-overlay"></div>
+          <div className="hero-content">
+            <div className="hero-label">Portfolio</div>
+            <h1 className="hero-title">
+              Chet<br />Mutaphon
+            </h1>
+            <p className="hero-subtitle">
+              Visual storytelling for luxury hospitality
+            </p>
+          </div>
+          <div className="hero-scroll">
+            <div className="hero-scroll-line"></div>
+          </div>
+        </section>
       );
     }
 
-    // ── APP ───────────────────────────────────────────────────────────────────
+    function AboutSection() {
+      return (
+        <section className="section" id="about">
+          <SectionHeader title="About" />
+          <div className="about-grid">
+            <ScrollReveal>
+              <div className="about-portrait">
+                <img src={window.makePlaceholder(600, 800, 'portrait photo', 28)} alt="Chet Mutaphon" />
+              </div>
+            </ScrollReveal>
+            <div>
+              <ScrollReveal>
+                <p className="about-bio">{window.ABOUT_DATA.bio}</p>
+              </ScrollReveal>
+              <div className="about-exp">
+                {window.ABOUT_DATA.experience.map(function(exp, i) {
+                  return (
+                    <ScrollReveal key={i} delay={i + 1}>
+                      <div className="about-exp-item">
+                        <div className="about-exp-role">{exp.role}</div>
+                        <div className="about-exp-company">{exp.company}</div>
+                        <div className="about-exp-period">{exp.period}</div>
+                      </div>
+                    </ScrollReveal>
+                  );
+                })}
+              </div>
+              <ScrollReveal>
+                <div className="about-skills">
+                  {window.ABOUT_DATA.skills.map(function(s) {
+                    return <span key={s} className="skill-tag">{s}</span>;
+                  })}
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+      );
+    }
 
-    function App() {
-      const [loaded, setLoaded] = React.useState(false);
-      const [theme, setTheme] = React.useState('appleMinimal');
-      const active = useActiveSection(['about', 'experience', 'artwork', 'photography', 'videos', 'dashboard']);
+    window.HeroSection = HeroSection;
+    window.AboutSection = AboutSection;
+  </script>
 
-      React.useEffect(() => { applyTheme('appleMinimal'); }, []);
-      React.useEffect(() => { applyTheme(theme); }, [theme]);
+  <!-- ─── Works, Newsletter, Contact sections ─── -->
+  <script type="text/babel">
+    function WorksSection({ onImageClick, tweaks }) {
+      return (
+        <section className="section" id="works">
+          <SectionHeader title="Selected Works" />
+          <div className="works-grid" style={{ gap: tweaks.gridGap + 'px' }}>
+            {window.SELECTED_WORKS.map(function(work, i) {
+              return (
+                <ScrollReveal key={work.id} delay={(i % 2) + 1}>
+                  <div className="work-card" onClick={function() {
+                    onImageClick(window.SELECTED_WORKS.map(function(w) { return w.img; }), i);
+                  }}>
+                    <img src={work.img} alt={work.title} loading="lazy" />
+                    <div className="work-card-overlay">
+                      <div className="work-card-cat">{work.category}</div>
+                      <div className="work-card-title">{work.title}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    function NewsletterSection() {
+      const [readerOpen, setReaderOpen] = React.useState(false);
+      const [selectedIssue, setSelectedIssue] = React.useState(null);
+      const [currentPage, setCurrentPage] = React.useState(0);
+
+      function openReader(issue) {
+        setSelectedIssue(issue);
+        setCurrentPage(0);
+        setReaderOpen(true);
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeReader() {
+        setReaderOpen(false);
+        document.body.style.overflow = '';
+      }
+
+      const pages = selectedIssue ? Array.from({ length: selectedIssue.pages }, function(_, i) {
+        return window.makePlaceholder(400, 560, 'Page ' + (i + 1), 28 + i * 2);
+      }) : [];
 
       return (
-        <>
-          {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
-          <ScrollProgress />
-          <Navigation active={active} />
-          <HeroSection />
-          <AboutSkillsSection />
-          <ExperienceSection />
-          <ArtworkSection />
-          <PhotographySection />
-          <VideoSection />
-          <DashboardSection />
-          <FooterSection />
-          <ThemeSwitcher current={theme} onChange={setTheme} />
-        </>
+        <section className="section" id="newsletter">
+          <SectionHeader title="Newsletter Archive" />
+          <div className="newsletter-grid">
+            {window.NEWSLETTER_ITEMS.map(function(item, i) {
+              return (
+                <ScrollReveal key={item.id} delay={(i % 3) + 1}>
+                  <div className="newsletter-card" onClick={function() { openReader(item); }}>
+                    <div className="newsletter-cover">
+                      <img src={item.cover} alt={item.title} loading="lazy" />
+                    </div>
+                    <div className="newsletter-title">{item.title}</div>
+                    <div className="newsletter-meta">{item.date}</div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+
+          {readerOpen && selectedIssue && (
+            <div className="reader-modal" onClick={closeReader}>
+              <div className="reader-book" onClick={(e) => e.stopPropagation()}>
+                <div className="reader-page">
+                  <img src={pages[currentPage] || ''} alt={'Page ' + (currentPage + 1)} />
+                </div>
+                {currentPage + 1 < pages.length && (
+                  <div className="reader-page">
+                    <img src={pages[currentPage + 1] || ''} alt={'Page ' + (currentPage + 2)} />
+                  </div>
+                )}
+                {currentPage > 0 && (
+                  <button className="reader-nav prev" onClick={() => setCurrentPage(Math.max(0, currentPage - 2))}>‹</button>
+                )}
+                {currentPage + 2 < pages.length && (
+                  <button className="reader-nav next" onClick={() => setCurrentPage(Math.min(pages.length - 1, currentPage + 2))}>›</button>
+                )}
+                <button className="reader-close" onClick={closeReader}>✕</button>
+              </div>
+            </div>
+          )}
+        </section>
+      );
+    }
+
+    function ContactSection() {
+      return (
+        <section className="section" id="contact">
+          <SectionHeader title="Contact" />
+          <div className="contact-grid">
+            <ScrollReveal>
+              <div className="contact-info">
+                <div>
+                  <div className="contact-label">Email</div>
+                  <a href={'mailto:' + window.SITE_CONFIG.email} className="contact-value">{window.SITE_CONFIG.email}</a>
+                </div>
+                <div>
+                  <div className="contact-label">LinkedIn</div>
+                  <a href={window.SITE_CONFIG.linkedin} target="_blank" rel="noopener" className="contact-value">View Profile →</a>
+                </div>
+                <div>
+                  <div className="contact-label">Location</div>
+                  <div className="contact-value">{window.SITE_CONFIG.location}</div>
+                </div>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={1}>
+              <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                <div className="form-field">
+                  <label>Name</label>
+                  <input type="text" />
+                </div>
+                <div className="form-field">
+                  <label>Email</label>
+                  <input type="email" />
+                </div>
+                <div className="form-field">
+                  <label>Message</label>
+                  <textarea></textarea>
+                </div>
+                <button type="submit" className="form-submit">Send</button>
+              </form>
+            </ScrollReveal>
+          </div>
+        </section>
+      );
+    }
+
+    window.WorksSection = WorksSection;
+    window.NewsletterSection = NewsletterSection;
+    window.ContactSection = ContactSection;
+  </script>
+
+  <!-- ─── Gallery sections: Photo, F&B, Sales, Dashboard ─── -->
+  <script type="text/babel">
+    function PhotoSection({ onImageClick, tweaks }) {
+      const [filter, setFilter] = React.useState('All');
+      const categories = ['All'].concat([...new Set(window.PHOTO_ITEMS.map(function(p) { return p.category; }))]);
+      const filtered = filter === 'All' ? window.PHOTO_ITEMS : window.PHOTO_ITEMS.filter(function(p) { return p.category === filter; });
+
+      return (
+        <section className="section" id="photo">
+          <SectionHeader title="Photography" />
+          <div className="photo-filters">
+            {categories.map(function(cat) {
+              return (
+                <button key={cat}
+                  className={'filter-btn' + (filter === cat ? ' active' : '')}
+                  onClick={function() { setFilter(cat); }}>
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+          <div className="masonry-grid" style={{ columnGap: tweaks.gridGap + 'px' }}>
+            {filtered.map(function(photo, i) {
+              return (
+                <div key={photo.id} className="masonry-item"
+                  style={{ marginBottom: tweaks.gridGap + 'px' }}
+                  onClick={function() {
+                    onImageClick(filtered.map(function(p) { return p.img; }), i);
+                  }}>
+                  <img src={photo.img} alt={photo.title} loading="lazy" />
+                  <div className="masonry-item-overlay">
+                    <span className="masonry-item-title">{photo.title}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    function FnbSection({ onImageClick, tweaks }) {
+      return (
+        <section className="section" id="fnb">
+          <SectionHeader title="F&amp;B Promotions" />
+          <div className="fnb-grid" style={{ gap: tweaks.gridGap + 'px' }}>
+            {window.FNB_ITEMS.map(function(item, i) {
+              return (
+                <ScrollReveal key={item.id} delay={(i % 3) + 1}>
+                  <div className={'fnb-card' + (item.size === 'large' ? ' large' : '')}
+                    onClick={function() { onImageClick(window.FNB_ITEMS.map(function(f) { return f.img; }), i); }}>
+                    <img src={item.img} alt={item.title} loading="lazy" style={{ aspectRatio: item.ratio }} />
+                    <div className="fnb-card-overlay">
+                      <div className="fnb-card-cat">{item.category}</div>
+                      <div className="fnb-card-title">{item.title}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    function SalesSection({ onImageClick, tweaks }) {
+      const featured = window.SALES_ITEMS.filter(function(s) { return s.featured; });
+      const others = window.SALES_ITEMS.filter(function(s) { return !s.featured; });
+
+      return (
+        <section className="section" id="sales">
+          <SectionHeader title="Sales & Packages" />
+          <div className="sales-featured" style={{ gap: tweaks.gridGap + 'px' }}>
+            {featured.map(function(item, i) {
+              return (
+                <ScrollReveal key={item.id} delay={i + 1}>
+                  <div className="sales-card hero-card"
+                    onClick={function() { onImageClick(window.SALES_ITEMS.map(function(s) { return s.img; }), window.SALES_ITEMS.indexOf(item)); }}>
+                    <img src={item.img} alt={item.title} loading="lazy" />
+                    <div className="sales-card-overlay">
+                      <div className="sales-card-cat">{item.category}</div>
+                      <div className="sales-card-title">{item.title}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+          <div className="sales-grid" style={{ gap: tweaks.gridGap + 'px' }}>
+            {others.map(function(item, i) {
+              return (
+                <ScrollReveal key={item.id} delay={(i % 3) + 1}>
+                  <div className="sales-card"
+                    onClick={function() { onImageClick(window.SALES_ITEMS.map(function(s) { return s.img; }), window.SALES_ITEMS.indexOf(item)); }}>
+                    <img src={item.img} alt={item.title} loading="lazy" />
+                    <div className="sales-card-overlay">
+                      <div className="sales-card-cat">{item.category}</div>
+                      <div className="sales-card-title">{item.title}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    function DashboardSection({ onImageClick, tweaks }) {
+      return (
+        <section className="section" id="dashboard">
+          <SectionHeader title="Dashboard & Case Studies" />
+          <div className="dash-grid" style={{ gap: tweaks.gridGap + 'px' }}>
+            {window.DASHBOARD_ITEMS.map(function(item, i) {
+              return (
+                <ScrollReveal key={item.id} delay={(i % 2) + 1}>
+                  <div className="dash-card"
+                    onClick={function() { onImageClick(window.DASHBOARD_ITEMS.map(function(d) { return d.img; }), i); }}>
+                    <img src={item.img} alt={item.title} loading="lazy" />
+                    <div className="dash-card-overlay">
+                      <div className="dash-card-cat">{item.category}</div>
+                      <div className="dash-card-title">{item.title}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    window.PhotoSection = PhotoSection;
+    window.FnbSection = FnbSection;
+    window.SalesSection = SalesSection;
+    window.DashboardSection = DashboardSection;
+  </script>
+
+  <!-- ─── Media sections: Video, Social ─── -->
+  <script type="text/babel">
+    function VideoSection({ tweaks }) {
+      const [activeVideo, setActiveVideo] = React.useState(null);
+
+      React.useEffect(() => {
+        if (activeVideo) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = '';
+        return () => { document.body.style.overflow = ''; };
+      }, [activeVideo]);
+
+      return (
+        <section className="section" id="video">
+          <SectionHeader title="Video" />
+          <div className="video-grid" style={{ gap: tweaks.gridGap + 'px' }}>
+            {window.VIDEO_ITEMS.map(function(video, i) {
+              return (
+                <ScrollReveal key={video.id} delay={(i % 3) + 1}>
+                  <div className="video-card" onClick={function() { if (video.vimeoId) setActiveVideo(video); }}>
+                    <div className="video-card-inner">
+                      {video.vimeoId ? (
+                        <iframe
+                          src={'https://player.vimeo.com/video/' + video.vimeoId + '?background=1&autoplay=0&loop=1&muted=1'}
+                          loading="lazy"
+                          allow="autoplay"
+                          title={video.title}
+                        />
+                      ) : (
+                        <img src={video.thumbnail} alt={video.title} loading="lazy" />
+                      )}
+                    </div>
+                    <div className="video-play-icon"></div>
+                    <div className="video-card-info">
+                      <div className="video-card-title">{video.title}</div>
+                      <div className="video-card-cat">{video.category}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+
+          {activeVideo && activeVideo.vimeoId && (
+            <div className="lightbox" onClick={() => setActiveVideo(null)} style={{ cursor: 'default' }}>
+              <button className="lightbox-close" onClick={() => setActiveVideo(null)}>✕</button>
+              <div onClick={(e) => e.stopPropagation()}
+                style={{
+                  width: 'min(340px, 90vw)', aspectRatio: '9/16',
+                  background: '#000', position: 'relative', overflow: 'hidden',
+                  animation: 'lbFade 0.5s cubic-bezier(0.22, 1, 0.36, 1)'
+                }}>
+                <iframe
+                  src={'https://player.vimeo.com/video/' + activeVideo.vimeoId + '?autoplay=1&loop=1&title=0&byline=0&portrait=0'}
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  title={activeVideo.title}
+                />
+              </div>
+              <div style={{
+                position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+                fontSize: '0.68rem', color: 'var(--text-muted)', letterSpacing: '0.12em', fontWeight: 300
+              }}>
+                {activeVideo.title}
+              </div>
+            </div>
+          )}
+        </section>
+      );
+    }
+
+    function SocialSection({ tweaks }) {
+      return (
+        <section className="section" id="social">
+          <SectionHeader title="Social Content" />
+          <div className="social-grid" style={{ gap: tweaks.gridGap + 'px' }}>
+            {window.SOCIAL_ITEMS.map(function(item, i) {
+              return (
+                <ScrollReveal key={item.id} delay={(i % 3) + 1}>
+                  <div className="social-card">
+                    <img src={item.thumbnail} alt={item.title} loading="lazy" />
+                    <div className="social-card-badge">{item.type}</div>
+                    <div className="social-card-info">
+                      <div className="social-card-title">{item.title}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    window.VideoSection = VideoSection;
+    window.SocialSection = SocialSection;
+  </script>
+
+  <!-- ─── Main App ─── -->
+  <script type="text/babel">
+    const TWEAK_DEFAULTS = {
+      "gridDensity": "tight",
+      "typePairing": "classic"
+    };
+
+    function App() {
+      const [tweaks, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const [activeSection, setActiveSection] = React.useState('home');
+      const [lbImages, setLbImages] = React.useState([]);
+      const [lbIndex, setLbIndex] = React.useState(-1);
+
+      const effectiveGap = tweaks.gridDensity === 'tight' ? 4 : tweaks.gridDensity === 'spacious' ? 16 : 8;
+      const effectiveTweaks = Object.assign({}, tweaks, { gridGap: effectiveGap });
+
+      React.useEffect(function() {
+        const root = document.documentElement;
+        if (tweaks.typePairing === 'classic') {
+          root.style.setProperty('--font-display', "'Playfair Display', Georgia, serif");
+          root.style.setProperty('--font-body', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+        } else {
+          root.style.setProperty('--font-display', "'Cormorant Garamond', Georgia, serif");
+          root.style.setProperty('--font-body', "'DM Sans', 'Helvetica Neue', sans-serif");
+        }
+      }, [tweaks.typePairing]);
+
+      React.useEffect(function() {
+        function onScroll() {
+          const sections = window.NAV_ITEMS.map(function(n) { return n.id; });
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const el = document.getElementById(sections[i]);
+            if (el && el.getBoundingClientRect().top <= 200) {
+              setActiveSection(sections[i]);
+              break;
+            }
+          }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return function() { window.removeEventListener('scroll', onScroll); };
+      }, []);
+
+      React.useEffect(function() {
+        if (menuOpen) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = '';
+        return function() { document.body.style.overflow = ''; };
+      }, [menuOpen]);
+
+      function openLightbox(images, index) {
+        setLbImages(images);
+        setLbIndex(index);
+      }
+
+      function navLightbox(dir) {
+        setLbIndex(function(prev) {
+          const next = prev + dir;
+          if (next < 0) return lbImages.length - 1;
+          if (next >= lbImages.length) return 0;
+          return next;
+        });
+      }
+
+      return (
+        <React.Fragment>
+          <NavBar
+            activeSection={activeSection}
+            menuOpen={menuOpen}
+            onMenuToggle={() => setMenuOpen(!menuOpen)}
+          />
+          <MenuOverlay
+            open={menuOpen}
+            activeSection={activeSection}
+            onClose={() => setMenuOpen(false)}
+          />
+
+          <main>
+            <HeroSection />
+            <AboutSection />
+            <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            <PhotoSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            <VideoSection tweaks={effectiveTweaks} />
+            <FnbSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            <SocialSection tweaks={effectiveTweaks} />
+            <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            <NewsletterSection />
+            <ContactSection />
+            <Footer />
+          </main>
+
+          {lbIndex >= 0 && (
+            <Lightbox
+              images={lbImages}
+              currentIndex={lbIndex}
+              onClose={() => setLbIndex(-1)}
+              onNav={navLightbox}
+            />
+          )}
+
+          <TweaksPanel title="Design Controls">
+            <TweakSection label="Typography">
+              <TweakRadio label="Type Pairing" value={tweaks.typePairing}
+                options={[
+                  { value: 'classic', label: 'Playfair + Helvetica' },
+                  { value: 'editorial', label: 'Cormorant + DM Sans' }
+                ]}
+                onChange={(v) => setTweak('typePairing', v)} />
+            </TweakSection>
+            <TweakSection label="Grid Layout">
+              <TweakRadio label="Grid Density" value={tweaks.gridDensity}
+                options={[
+                  { value: 'tight', label: 'Tight' },
+                  { value: 'normal', label: 'Normal' },
+                  { value: 'spacious', label: 'Spacious' }
+                ]}
+                onChange={(v) => setTweak('gridDensity', v)} />
+            </TweakSection>
+          </TweaksPanel>
+        </React.Fragment>
       );
     }
 
