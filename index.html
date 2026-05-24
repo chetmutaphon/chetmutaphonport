@@ -778,12 +778,12 @@
 
     // ── Selected Works (4:3) ──────────────────────────────────────────────────
     var SELECTED_WORKS = [
-      { id: 1, title: "Renaissance Phuket — Brand Campaign 2025", category: "Brand Design",   img: makePlaceholder(800, 600, "Resort Campaign", 30) },
-      { id: 2, title: "NAP's Coffee — Visual Identity",           category: "Brand Identity", img: makePlaceholder(800, 600, "Coffee Brand", 35) },
-      { id: 3, title: "Sunset Sessions — Event Series",           category: "Event Design",   img: makePlaceholder(800, 600, "Event Poster", 25) },
-      { id: 4, title: "Andaman Wellness Retreat",                 category: "Campaign",       img: makePlaceholder(800, 600, "Wellness Campaign", 20) },
-      { id: 5, title: "Phuket Culinary Festival",                 category: "Art Direction",  img: makePlaceholder(800, 600, "Culinary Festival", 40) },
-      { id: 6, title: "Marriott Bonvoy — Member Exclusives",      category: "Digital Design", img: makePlaceholder(800, 600, "Loyalty Program", 28) }
+      { id: 1, title: "", category: "Brand Design",   img: makePlaceholder(800, 600, "Resort Campaign", 30) },
+      { id: 2, title: "",           category: "Brand Identity", img: makePlaceholder(800, 600, "Coffee Brand", 35) },
+      { id: 3, title: "",           category: "Event Design",   img: makePlaceholder(800, 600, "Event Poster", 25) },
+      { id: 4, title: "",                 category: "Campaign",       img: makePlaceholder(800, 600, "Wellness Campaign", 20) },
+      { id: 5, title: "",                 category: "Art Direction",  img: makePlaceholder(800, 600, "Culinary Festival", 40) },
+      { id: 6, title: "",      category: "Digital Design", img: makePlaceholder(800, 600, "Loyalty Program", 28) }
       // ↑ เพิ่ม: { id: 7, title: "...", category: "...", img: 'images/...' },
     ];
 
@@ -806,13 +806,13 @@
 
     // ── Video — vimeoId จาก vimeo.com/XXXXXXX ────────────────────────────────
     var VIDEO_ITEMS = [
-      { id: 1, title: "Resort Experience Film",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Resort Film", 30),   vimeoId: "" },
-      { id: 2, title: "Cocktail Making Reel",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Cocktail Reel", 25), vimeoId: "" },
-      { id: 3, title: "Spa Journey",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "Spa Film", 20),      vimeoId: "" },
-      { id: 4, title: "Chef's Table Experience", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Chef Table", 35),   vimeoId: "" },
-      { id: 5, title: "Sunset Pool Party",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Pool Party", 15),   vimeoId: "" },
-      { id: 6, title: "Room Tour — Ocean Suite", category: "Resort",  thumbnail: makePlaceholder(360, 640, "Room Tour", 28),    vimeoId: "" },
-      { id: 7, title: "Lifestyle Reel",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "Lifestyle", 32),    vimeoId: "" }
+      { id: 1, title: "Mole Crab",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Takieng", 30),   vimeoId: "https://vimeo.com/1195092714?fl=tl&fe=ec" },
+      { id: 2, title: "Ching Pla Market",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Takieng", 25), vimeoId: "https://vimeo.com/1195092762?fl=tl&fe=ec" },
+      { id: 3, title: "HK Towel",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "HK Towel", 20),      vimeoId: "https://vimeo.com/1195092816?fl=tl&fe=ec" },
+      { id: 4, title: "Sand Box", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Sand Box", 35),   vimeoId: "https://vimeo.com/1195092687?fl=tl&fe=ec" },
+      { id: 5, title: "Hyrox",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Hyrox", 15),   vimeoId: "https://vimeo.com/1195092646?fl=tl&fe=ec" },
+      { id: 6, title: "CNY", category: "Resort",  thumbnail: makePlaceholder(360, 640, "CNY", 28),    vimeoId: "https://vimeo.com/1195092800?fl=tl&fe=ec" },
+      { id: 7, title: "MBV Blocparty",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "MBV Blocparty", 32),    vimeoId: "https://vimeo.com/1195092626?fl=tl&fe=ec" }
       // ↑ เพิ่ม: { id: 8, title: "...", category: "...", thumbnail: 'images/...', vimeoId: "1234567" },
     ];
 
@@ -844,14 +844,14 @@
 
     // ── Social Media Content ──────────────────────────────────────────────────
     var SOCIAL_ITEMS = [
-      { id: 1, title: "Resort Highlights Reel",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
-      { id: 2, title: "Behind the Scenes — Kitchen",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
-      { id: 3, title: "Guest Experience Stories",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
-      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
-      { id: 5, title: "Coffee Art Process",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
-      { id: 6, title: "New Menu Launch",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
-      { id: 7, title: "Sunset Timelapse",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
-      { id: 8, title: "Room Reveal — Suite Tour",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
+      { id: 1, title: "So1",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
+      { id: 2, title: "So2",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
+      { id: 3, title: "So3",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
+      { id: 4, title: "So4", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
+      { id: 5, title: "So5",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
+      { id: 6, title: "So6",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
+      { id: 7, title: "So7",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
+      { id: 8, title: "",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
       // ↑ เพิ่ม: { id: 9, title: "...", type: "reel", thumbnail: 'images/...' },
     ];
 
@@ -869,11 +869,11 @@
     // ── Newsletter Archive ────────────────────────────────────────────────────
     var NEWSLETTER_ITEMS = [
       { id: 1, title: "The Renaissance Review — Issue 12", date: "March 2026",    pages: 16, cover: makePlaceholder(400, 560, "Issue 12", 30) },
-      { id: 2, title: "The Renaissance Review — Issue 11", date: "February 2026", pages: 14, cover: makePlaceholder(400, 560, "Issue 11", 25) },
-      { id: 3, title: "The Renaissance Review — Issue 10", date: "January 2026",  pages: 12, cover: makePlaceholder(400, 560, "Issue 10", 35) },
-      { id: 4, title: "NAP's Monthly — Final Edition",     date: "December 2024", pages: 10, cover: makePlaceholder(400, 560, "NAPs Final", 38) },
-      { id: 5, title: "The Renaissance Review — Issue 09", date: "December 2025", pages: 14, cover: makePlaceholder(400, 560, "Issue 09", 20) },
-      { id: 6, title: "The Renaissance Review — Issue 08", date: "November 2025", pages: 12, cover: makePlaceholder(400, 560, "Issue 08", 28) }
+      { id: 2, title: "", date: "February 2026", pages: 14, cover: makePlaceholder(400, 560, "Issue 11", 25) },
+      { id: 3, title: "", date: "January 2026",  pages: 12, cover: makePlaceholder(400, 560, "Issue 10", 35) },
+      { id: 4, title: "",     date: "December 2024", pages: 10, cover: makePlaceholder(400, 560, "NAPs Final", 38) },
+      { id: 5, title: "", date: "December 2025", pages: 14, cover: makePlaceholder(400, 560, "Issue 09", 20) },
+      { id: 6, title: "", date: "November 2025", pages: 12, cover: makePlaceholder(400, 560, "Issue 08", 28) }
       // ↑ เพิ่ม: { id: 7, title: "...", date: "...", pages: 12, cover: 'images/...' },
     ];
   </script>
@@ -1666,7 +1666,7 @@
           <main>
             <HeroSection />
             <AboutSection />
-            <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            {/* <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
             <PhotoSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <VideoSection tweaks={effectiveTweaks} />
             <FnbSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
