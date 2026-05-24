@@ -449,7 +449,7 @@
       background: var(--bg-card);
     }
     .social-card img {
-      width: 100%; aspect-ratio: 9/16; object-fit: cover;
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
       transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
     }
     .social-card:hover img { transform: scale(1.02); opacity: 0.85; }
@@ -711,7 +711,7 @@
       .social-grid { grid-template-columns: repeat(2, 1fr); }
       .reader-book { width: 92vw; }
     }
-    @media (max-width: 480px) {ƒ
+    @media (max-width: 480px) {
       :root { --masonry-cols: 2; }
       .newsletter-grid { grid-template-columns: 1fr; }
     }
@@ -738,7 +738,7 @@
       tagline:    "Crafting cinematic brand experiences through design, photography, and strategic visual communication",
       email:      "chet.mutaphon@gmail.com",
       linkedin:   "https://www.linkedin.com/in/chet-mutaphon-84b5ab175",
-      experience: "5years",
+      experience: "5+",
       location:   "Phuket, Thailand"
     };
 
@@ -764,7 +764,7 @@
       ],
       skills: [
         "Brand Design", "Art Direction", "Photography", "Videography",
-        "Editor", "Social Media Strategy", "Campaign Design", "Ai Generative"
+        "UI/UX Design", "Social Media Strategy", "Campaign Design", "Editorial Layout"
       ]
     };
 
@@ -778,80 +778,80 @@
 
     // ── Selected Works (4:3) ──────────────────────────────────────────────────
     var SELECTED_WORKS = [
-      { id: 1, title: "", category: "Brand Design",   img: makePlaceholder(800, 600, "Resort Campaign", 30) },
-      { id: 2, title: "",           category: "Brand Identity", img: makePlaceholder(800, 600, "Coffee Brand", 35) },
-      { id: 3, title: "",           category: "Event Design",   img: makePlaceholder(800, 600, "Event Poster", 25) },
-      { id: 4, title: "",                 category: "Campaign",       img: makePlaceholder(800, 600, "Wellness Campaign", 20) },
-      { id: 5, title: "",                 category: "Art Direction",  img: makePlaceholder(800, 600, "Culinary Festival", 40) },
-      { id: 6, title: "",      category: "Digital Design", img: makePlaceholder(800, 600, "Loyalty Program", 28) }
+      { id: 1, title: "Renaissance Phuket — Brand Campaign 2025", category: "Brand Design",   img: makePlaceholder(800, 600, "Resort Campaign", 30) },
+      { id: 2, title: "NAP's Coffee — Visual Identity",           category: "Brand Identity", img: makePlaceholder(800, 600, "Coffee Brand", 35) },
+      { id: 3, title: "Sunset Sessions — Event Series",           category: "Event Design",   img: makePlaceholder(800, 600, "Event Poster", 25) },
+      { id: 4, title: "Andaman Wellness Retreat",                 category: "Campaign",       img: makePlaceholder(800, 600, "Wellness Campaign", 20) },
+      { id: 5, title: "Phuket Culinary Festival",                 category: "Art Direction",  img: makePlaceholder(800, 600, "Culinary Festival", 40) },
+      { id: 6, title: "Marriott Bonvoy — Member Exclusives",      category: "Digital Design", img: makePlaceholder(800, 600, "Loyalty Program", 28) }
       // ↑ เพิ่ม: { id: 7, title: "...", category: "...", img: 'images/...' },
     ];
 
     // ── Photography (3:4 portrait) ────────────────────────────────────────────
     var PHOTO_ITEMS = [
-      { id:  1, title: "Photo1.png",            category: "Editorial", img: 'Photo1.jpg' },
-      { id:  2, title: "Photo2.jpg",           category: "Editorial", img: 'Photo2.jpg' },
-      { id:  3, title: "Photo3.jpg",          category: "Editorial", img: 'Photo3.jpg' },
-      { id:  4, title: "Photo4.jpg",           category: "Editorial", img: 'Photo4.jpg' },
-      { id:  5, title: "Photo5.png",            category: "Editorial", img: 'Photo5.png' },
-      { id:  6, title: "Photo6.png",           category: "Editorial", img: 'Photo6.png' },
-      { id:  7, title: "",     category: "Resort",    img: makePlaceholder(600, 800, "", 30) },
-      { id:  8, title: "",   category: "F&B",       img: makePlaceholder(600, 800, "", 25) },
-      { id:  9, title: "",    category: "Event",     img: makePlaceholder(600, 800, "", 35) },
-      { id: 10, title: "",         category: "Resort",    img: makePlaceholder(600, 800, "", 20) },
-      { id: 11, title: "", category: "F&B",       img: makePlaceholder(600, 800, "", 32) },
-      { id: 12, title: "",   category: "Resort",    img: makePlaceholder(600, 800, "", 28) }
+      { id:  1, title: "Artwork I",            category: "Editorial", img: 'images/AW1.jpg' },
+      { id:  2, title: "Artwork II",           category: "Editorial", img: 'images/AW2.jpg' },
+      { id:  3, title: "Artwork III",          category: "Editorial", img: 'images/AW3.jpg' },
+      { id:  4, title: "Artwork IV",           category: "Editorial", img: 'images/AW4.jpg' },
+      { id:  5, title: "Artwork V",            category: "Editorial", img: 'images/AW5.jpg' },
+      { id:  6, title: "Artwork VI",           category: "Editorial", img: 'images/AW6.jpg' },
+      { id:  7, title: "Golden Hour Pool",     category: "Resort",    img: makePlaceholder(600, 800, "Resort Pool", 30) },
+      { id:  8, title: "Signature Cocktail",   category: "F&B",       img: makePlaceholder(600, 800, "Cocktail Shot", 25) },
+      { id:  9, title: "Beachfront Dining",    category: "Event",     img: makePlaceholder(600, 800, "Beach Dining", 35) },
+      { id: 10, title: "Spa Interior",         category: "Resort",    img: makePlaceholder(600, 800, "Spa Room", 20) },
+      { id: 11, title: "Thai Cuisine Plating", category: "F&B",       img: makePlaceholder(600, 800, "Thai Dish", 32) },
+      { id: 12, title: "Lobby Architecture",   category: "Resort",    img: makePlaceholder(600, 800, "Hotel Lobby", 28) }
       // ↑ เพิ่ม: { id: 13, title: "...", category: "...", img: 'images/...' },
     ];
 
     // ── Video — vimeoId จาก vimeo.com/XXXXXXX ────────────────────────────────
     var VIDEO_ITEMS = [
-      { id: 1, title: "Mole Crab",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Takieng", 30),   vimeoId: "https://vimeo.com/1195092714?fl=tl&fe=ec" },
-      { id: 2, title: "Ching Pla Market",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Takieng", 25), vimeoId: "https://vimeo.com/1195092762?fl=tl&fe=ec" },
-      { id: 3, title: "HK Towel",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "HK Towel", 20),      vimeoId: "https://vimeo.com/1195092816?fl=tl&fe=ec" },
-      { id: 4, title: "Sand Box", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Sand Box", 35),   vimeoId: "https://vimeo.com/1195092687?fl=tl&fe=ec" },
-      { id: 5, title: "Hyrox",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Hyrox", 15),   vimeoId: "https://vimeo.com/1195092646?fl=tl&fe=ec" },
-      { id: 6, title: "CNY", category: "Resort",  thumbnail: makePlaceholder(360, 640, "CNY", 28),    vimeoId: "https://vimeo.com/1195092800?fl=tl&fe=ec" },
-      { id: 7, title: "MBV Blocparty",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "MBV Blocparty", 32),    vimeoId: "https://vimeo.com/1195092626?fl=tl&fe=ec" }
+      { id: 1, title: "Resort Experience Film",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Resort Film", 30),   vimeoId: "" },
+      { id: 2, title: "Cocktail Making Reel",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Cocktail Reel", 25), vimeoId: "" },
+      { id: 3, title: "Spa Journey",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "Spa Film", 20),      vimeoId: "" },
+      { id: 4, title: "Chef's Table Experience", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Chef Table", 35),   vimeoId: "" },
+      { id: 5, title: "Sunset Pool Party",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Pool Party", 15),   vimeoId: "" },
+      { id: 6, title: "Room Tour — Ocean Suite", category: "Resort",  thumbnail: makePlaceholder(360, 640, "Room Tour", 28),    vimeoId: "" },
+      { id: 7, title: "Lifestyle Reel",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "Lifestyle", 32),    vimeoId: "" }
       // ↑ เพิ่ม: { id: 8, title: "...", category: "...", thumbnail: 'images/...', vimeoId: "1234567" },
     ];
 
     // ── F&B Promotions ────────────────────────────────────────────────────────
     var FNB_ITEMS = [
-      { id: 1, title: "AW1.png", category: "Sand Box", size: "large",  ratio: "4/5", img: 'images/fnb-trinity-burger.jpg' },
-      { id: 2, title: "AW2.png",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'images/fnb-chefs-selection.jpg' },
-      { id: 3, title: "AW3.jpg",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'images/fnb-tartare-selection.jpg' },
-      { id: 4, title: "AW4.jpg",             category: "Bar",      size: "medium", ratio: "4/5", img: 'images/fnb-pink-paradise.jpg' },
-      { id: 5, title: "AW5.jpg",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Afternoon Tea", 32) },
-      { id: 6, title: "AW6.jpg",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "Happy Hour", 28) },
-      { id: 7, title: "",             category: "Event",    size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Street Food", 38) },
-      { id: 8, title: "",                     category: "Event",    size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "BBQ Night", 18) }
+      { id: 1, title: "The Trinity Burger — Premium Wagyu", category: "Sand Box", size: "large",  ratio: "4/5", img: 'images/fnb-trinity-burger.jpg' },
+      { id: 2, title: "Chef's Selection Set — Takieng",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'images/fnb-chefs-selection.jpg' },
+      { id: 3, title: "Tartare Selection",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'images/fnb-tartare-selection.jpg' },
+      { id: 4, title: "Pink Paradise Cocktail",             category: "Bar",      size: "medium", ratio: "4/5", img: 'images/fnb-pink-paradise.jpg' },
+      { id: 5, title: "Afternoon Tea Collection",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Afternoon Tea", 32) },
+      { id: 6, title: "Pool Bar Happy Hour",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "Happy Hour", 28) },
+      { id: 7, title: "Thai Street Food Night",             category: "Event",    size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Street Food", 38) },
+      { id: 8, title: "Beachfront BBQ",                     category: "Event",    size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "BBQ Night", 18) }
       // ↑ เพิ่ม: { id: 9, title: "...", category: "...", size: "small", ratio: "4/5", img: 'images/...' },
     ];
 
     // ── Sales & Packages ──────────────────────────────────────────────────────
     var SALES_ITEMS = [
-      { id: 1, title: "",     category: "Romance",  featured: true,  img: makePlaceholder(800, 600, "Honeymoon Package", 25) },
-      { id: 2, title: "",      category: "Spa",      featured: false, img: makePlaceholder(800, 600, "Wellness Retreat", 20) },
-      { id: 3, title: "",              category: "Family",   featured: false, img: makePlaceholder(800, 600, "Family Package", 35) },
-      { id: 4, title: "",             category: "Wedding",  featured: true,  img: makePlaceholder(800, 600, "Wedding Package", 18) },
-      { id: 5, title: "",     category: "Seasonal", featured: false, img: makePlaceholder(800, 600, "Festive Offer", 30) },
-      { id: 6, title: "",   category: "Loyalty",  featured: false, img: makePlaceholder(800, 600, "Member Exclusive", 28) },
-      { id: 7, title: "", category: "Extended", featured: true,  img: makePlaceholder(800, 600, "Long Stay", 22) },
-      { id: 8, title: "",                   category: "Spa",      featured: false, img: makePlaceholder(800, 600, "Spa Day", 15) }
+      { id: 1, title: "Honeymoon Paradise Package",     category: "Romance",  featured: true,  img: makePlaceholder(800, 600, "Honeymoon Package", 25) },
+      { id: 2, title: "Wellness Retreat — 5 Days",      category: "Spa",      featured: false, img: makePlaceholder(800, 600, "Wellness Retreat", 20) },
+      { id: 3, title: "Family Fun Summer",              category: "Family",   featured: false, img: makePlaceholder(800, 600, "Family Package", 35) },
+      { id: 4, title: "Wedding by the Sea",             category: "Wedding",  featured: true,  img: makePlaceholder(800, 600, "Wedding Package", 18) },
+      { id: 5, title: "Festive Season Celebration",     category: "Seasonal", featured: false, img: makePlaceholder(800, 600, "Festive Offer", 30) },
+      { id: 6, title: "Bonvoy Member Exclusive Stay",   category: "Loyalty",  featured: false, img: makePlaceholder(800, 600, "Member Exclusive", 28) },
+      { id: 7, title: "Long Stay — Work from Paradise", category: "Extended", featured: true,  img: makePlaceholder(800, 600, "Long Stay", 22) },
+      { id: 8, title: "Spa Day Pass",                   category: "Spa",      featured: false, img: makePlaceholder(800, 600, "Spa Day", 15) }
       // ↑ เพิ่ม: { id: 9, title: "...", category: "...", featured: false, img: 'images/...' },
     ];
 
     // ── Social Media Content ──────────────────────────────────────────────────
     var SOCIAL_ITEMS = [
-      { id: 1, title: "So1",       type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So1", 30) },
-      { id: 2, title: "So2",  type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So2", 25) },
-      { id: 3, title: "So3",     type: "Social Media", thumbnail: makePlaceholder(360, 640, "So3", 35) },
-      { id: 4, title: "So4", type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So4", 20) },
-      { id: 5, title: "So5",           type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So5", 38) },
-      { id: 6, title: "So6",              type: "Social Media", thumbnail: makePlaceholder(360, 640, "So6", 32) },
-      { id: 7, title: "So7",             type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So7", 15) },
-      { id: 8, title: "",     type: "Social Media",     thumbnail: makePlaceholder(360, 640, "", 28) }
+      { id: 1, title: "Resort Highlights Reel",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
+      { id: 2, title: "Behind the Scenes — Kitchen",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
+      { id: 3, title: "Guest Experience Stories",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
+      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
+      { id: 5, title: "Coffee Art Process",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
+      { id: 6, title: "New Menu Launch",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
+      { id: 7, title: "Sunset Timelapse",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
+      { id: 8, title: "Room Reveal — Suite Tour",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
       // ↑ เพิ่ม: { id: 9, title: "...", type: "reel", thumbnail: 'images/...' },
     ];
 
@@ -869,11 +869,11 @@
     // ── Newsletter Archive ────────────────────────────────────────────────────
     var NEWSLETTER_ITEMS = [
       { id: 1, title: "The Renaissance Review — Issue 12", date: "March 2026",    pages: 16, cover: makePlaceholder(400, 560, "Issue 12", 30) },
-      { id: 2, title: "", date: "February 2026", pages: 14, cover: makePlaceholder(400, 560, "Issue 11", 25) },
-      { id: 3, title: "", date: "January 2026",  pages: 12, cover: makePlaceholder(400, 560, "Issue 10", 35) },
-      { id: 4, title: "",     date: "December 2024", pages: 10, cover: makePlaceholder(400, 560, "NAPs Final", 38) },
-      { id: 5, title: "", date: "December 2025", pages: 14, cover: makePlaceholder(400, 560, "Issue 09", 20) },
-      { id: 6, title: "", date: "November 2025", pages: 12, cover: makePlaceholder(400, 560, "Issue 08", 28) }
+      { id: 2, title: "The Renaissance Review — Issue 11", date: "February 2026", pages: 14, cover: makePlaceholder(400, 560, "Issue 11", 25) },
+      { id: 3, title: "The Renaissance Review — Issue 10", date: "January 2026",  pages: 12, cover: makePlaceholder(400, 560, "Issue 10", 35) },
+      { id: 4, title: "NAP's Monthly — Final Edition",     date: "December 2024", pages: 10, cover: makePlaceholder(400, 560, "NAPs Final", 38) },
+      { id: 5, title: "The Renaissance Review — Issue 09", date: "December 2025", pages: 14, cover: makePlaceholder(400, 560, "Issue 09", 20) },
+      { id: 6, title: "The Renaissance Review — Issue 08", date: "November 2025", pages: 12, cover: makePlaceholder(400, 560, "Issue 08", 28) }
       // ↑ เพิ่ม: { id: 7, title: "...", date: "...", pages: 12, cover: 'images/...' },
     ];
   </script>
@@ -1666,13 +1666,13 @@
           <main>
             <HeroSection />
             <AboutSection />
-            {/* <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
+            <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <PhotoSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <VideoSection tweaks={effectiveTweaks} />
             <FnbSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
-            {/* <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
+            <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <SocialSection tweaks={effectiveTweaks} />
-            {/* <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
+            <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <NewsletterSection />
             <ContactSection />
             <Footer />
