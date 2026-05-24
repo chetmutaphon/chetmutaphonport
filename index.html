@@ -711,7 +711,7 @@
       .social-grid { grid-template-columns: repeat(2, 1fr); }
       .reader-book { width: 92vw; }
     }
-    @media (max-width: 480px) {
+    @media (max-width: 480px) {ƒ
       :root { --masonry-cols: 2; }
       .newsletter-grid { grid-template-columns: 1fr; }
     }
@@ -793,8 +793,8 @@
       { id:  2, title: "Photo2.jpg",           category: "Editorial", img: 'Photo2.jpg' },
       { id:  3, title: "Photo3.jpg",          category: "Editorial", img: 'Photo3.jpg' },
       { id:  4, title: "Photo4.jpg",           category: "Editorial", img: 'Photo4.jpg' },
-      { id:  5, title: "Photo5.png",            category: "Editorial", img: 'images/AW5.jpg' },
-      { id:  6, title: "Photo6.png",           category: "Editorial", img: 'images/AW6.jpg' },
+      { id:  5, title: "Photo5.png",            category: "Editorial", img: 'Photo5.png' },
+      { id:  6, title: "Photo6.png",           category: "Editorial", img: 'Photo6.png' },
       { id:  7, title: "",     category: "Resort",    img: makePlaceholder(600, 800, "Resort Pool", 30) },
       { id:  8, title: "",   category: "F&B",       img: makePlaceholder(600, 800, "Cocktail Shot", 25) },
       { id:  9, title: "",    category: "Event",     img: makePlaceholder(600, 800, "Beach Dining", 35) },
@@ -844,14 +844,14 @@
 
     // ── Social Media Content ──────────────────────────────────────────────────
     var SOCIAL_ITEMS = [
-      { id: 1, title: "So1",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
-      { id: 2, title: "So2",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
-      { id: 3, title: "So3",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
-      { id: 4, title: "So4", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
-      { id: 5, title: "So5",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
-      { id: 6, title: "So6",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
-      { id: 7, title: "So7",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
-      { id: 8, title: "",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
+      { id: 1, title: "So1",       type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So1", 30) },
+      { id: 2, title: "So2",  type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So2", 25) },
+      { id: 3, title: "So3",     type: "Social Media", thumbnail: makePlaceholder(360, 640, "So3", 35) },
+      { id: 4, title: "So4", type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So4", 20) },
+      { id: 5, title: "So5",           type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So5", 38) },
+      { id: 6, title: "So6",              type: "Social Media", thumbnail: makePlaceholder(360, 640, "So6", 32) },
+      { id: 7, title: "So7",             type: "Social Media",     thumbnail: makePlaceholder(360, 640, "So7", 15) },
+      { id: 8, title: "",     type: "Social Media",     thumbnail: makePlaceholder(360, 640, "", 28) }
       // ↑ เพิ่ม: { id: 9, title: "...", type: "reel", thumbnail: 'images/...' },
     ];
 
@@ -1670,9 +1670,9 @@
             <PhotoSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <VideoSection tweaks={effectiveTweaks} />
             <FnbSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
-            <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            {/* <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
             <SocialSection tweaks={effectiveTweaks} />
-            <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            {/* <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
             <NewsletterSection />
             <ContactSection />
             <Footer />
