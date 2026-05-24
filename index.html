@@ -717,9 +717,9 @@
     }
   </style>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
@@ -789,35 +789,41 @@
 
     // ── Photography (3:4 portrait) ────────────────────────────────────────────
     var PHOTO_ITEMS = [
-      { id:  1, title: "Photo",            category: "Editorial", img: 'Photo1.png' },
-      { id:  2, title: "Photo",           category: "Editorial", img: 'Photo2.jpg' },
-      { id:  3, title: "Photo",          category: "Editorial", img: 'Photo3.jpg' },
-      { id:  4, title: "Photo",           category: "Editorial", img: 'Photo4.jpg' },
-      { id:  5, title: "Photo",            category: "Editorial", img: 'Photo5.png' },
-      { id:  6, title: "Photo",           category: "Editorial", img: 'Photo6.png' },
+      { id:  1, title: "Artwork I",            category: "Editorial", img: 'images/AW1.jpg' },
+      { id:  2, title: "Artwork II",           category: "Editorial", img: 'images/AW2.jpg' },
+      { id:  3, title: "Artwork III",          category: "Editorial", img: 'images/AW3.jpg' },
+      { id:  4, title: "Artwork IV",           category: "Editorial", img: 'images/AW4.jpg' },
+      { id:  5, title: "Artwork V",            category: "Editorial", img: 'images/AW5.jpg' },
+      { id:  6, title: "Artwork VI",           category: "Editorial", img: 'images/AW6.jpg' },
+      { id:  7, title: "Golden Hour Pool",     category: "Resort",    img: makePlaceholder(600, 800, "Resort Pool", 30) },
+      { id:  8, title: "Signature Cocktail",   category: "F&B",       img: makePlaceholder(600, 800, "Cocktail Shot", 25) },
+      { id:  9, title: "Beachfront Dining",    category: "Event",     img: makePlaceholder(600, 800, "Beach Dining", 35) },
+      { id: 10, title: "Spa Interior",         category: "Resort",    img: makePlaceholder(600, 800, "Spa Room", 20) },
+      { id: 11, title: "Thai Cuisine Plating", category: "F&B",       img: makePlaceholder(600, 800, "Thai Dish", 32) },
+      { id: 12, title: "Lobby Architecture",   category: "Resort",    img: makePlaceholder(600, 800, "Hotel Lobby", 28) }
       // ↑ เพิ่ม: { id: 13, title: "...", category: "...", img: 'images/...' },
     ];
 
     // ── Video — vimeoId จาก vimeo.com/XXXXXXX ────────────────────────────────
     var VIDEO_ITEMS = [
-      { id: 1, title: "Mole Crab",       category: "Brand",    thumbnail: makePlaceholder(360, 640, "Takieng", 30),      vimeoId: "1195092714" },
-      { id: 2, title: "Ching Pla Market", category: "F&B",      thumbnail: makePlaceholder(360, 640, "Takieng", 25),      vimeoId: "1195092762" },
-      { id: 3, title: "HK Towel",        category: "Wellness", thumbnail: makePlaceholder(360, 640, "HK Towel", 20),     vimeoId: "1195092816" },
-      { id: 4, title: "Sand Box",        category: "F&B",      thumbnail: makePlaceholder(360, 640, "Sand Box", 35),     vimeoId: "1195092687" },
-      { id: 5, title: "Hyrox",           category: "Event",    thumbnail: makePlaceholder(360, 640, "Hyrox", 15),        vimeoId: "1195092646" },
-      { id: 6, title: "CNY",             category: "Resort",   thumbnail: makePlaceholder(360, 640, "CNY", 28),          vimeoId: "1195092800" },
-      { id: 7, title: "MBV Blocparty",   category: "Brand",    thumbnail: makePlaceholder(360, 640, "MBV Blocparty", 32),vimeoId: "1195092626" }
+      { id: 1, title: "Resort Experience Film",  category: "Brand",   thumbnail: makePlaceholder(360, 640, "Resort Film", 30),   vimeoId: "" },
+      { id: 2, title: "Cocktail Making Reel",    category: "F&B",     thumbnail: makePlaceholder(360, 640, "Cocktail Reel", 25), vimeoId: "" },
+      { id: 3, title: "Spa Journey",             category: "Wellness",thumbnail: makePlaceholder(360, 640, "Spa Film", 20),      vimeoId: "" },
+      { id: 4, title: "Chef's Table Experience", category: "F&B",     thumbnail: makePlaceholder(360, 640, "Chef Table", 35),   vimeoId: "" },
+      { id: 5, title: "Sunset Pool Party",       category: "Event",   thumbnail: makePlaceholder(360, 640, "Pool Party", 15),   vimeoId: "" },
+      { id: 6, title: "Room Tour — Ocean Suite", category: "Resort",  thumbnail: makePlaceholder(360, 640, "Room Tour", 28),    vimeoId: "" },
+      { id: 7, title: "Lifestyle Reel",          category: "Brand",   thumbnail: makePlaceholder(360, 640, "Lifestyle", 32),    vimeoId: "" }
       // ↑ เพิ่ม: { id: 8, title: "...", category: "...", thumbnail: 'images/...', vimeoId: "1234567" },
     ];
 
     // ── F&B Promotions ────────────────────────────────────────────────────────
-    var FB_ITEMS = [
-      { id: 1, title: "The Trinity Burger — Premium Wagyu", category: "Sand Box", size: "large",  ratio: "4/5", img: 'AW1.jpg' },
-      { id: 2, title: "Chef's Selection Set — Takieng",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'AW2.jpg' },
-      { id: 3, title: "Tartare Selection",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'AW3.jpg' },
-      { id: 4, title: "Pink Paradise Cocktail",             category: "Bar",      size: "medium", ratio: "4/5", img: 'AW4.jpg' },
-      { id: 5, title: "Afternoon Tea Collection",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "AW5.jpg", 32) },
-      { id: 6, title: "Pool Bar Happy Hour",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "AW6.jpg", 28) },
+    var FNB_ITEMS = [
+      { id: 1, title: "The Trinity Burger — Premium Wagyu", category: "Sand Box", size: "large",  ratio: "4/5", img: 'images/fnb-trinity-burger.jpg' },
+      { id: 2, title: "Chef's Selection Set — Takieng",     category: "Takieng",  size: "large",  ratio: "4/5", img: 'images/fnb-chefs-selection.jpg' },
+      { id: 3, title: "Tartare Selection",                  category: "Sand Box", size: "small",  ratio: "4/5", img: 'images/fnb-tartare-selection.jpg' },
+      { id: 4, title: "Pink Paradise Cocktail",             category: "Bar",      size: "medium", ratio: "4/5", img: 'images/fnb-pink-paradise.jpg' },
+      { id: 5, title: "Afternoon Tea Collection",           category: "Dining",   size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Afternoon Tea", 32) },
+      { id: 6, title: "Pool Bar Happy Hour",                category: "Bar",      size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "Happy Hour", 28) },
       { id: 7, title: "Thai Street Food Night",             category: "Event",    size: "medium", ratio: "4/5", img: makePlaceholder(640, 800, "Street Food", 38) },
       { id: 8, title: "Beachfront BBQ",                     category: "Event",    size: "small",  ratio: "1/1", img: makePlaceholder(600, 600, "BBQ Night", 18) }
       // ↑ เพิ่ม: { id: 9, title: "...", category: "...", size: "small", ratio: "4/5", img: 'images/...' },
@@ -838,13 +844,14 @@
 
     // ── Social Media Content ──────────────────────────────────────────────────
     var SOCIAL_ITEMS = [
-      { id: 1, title: "Social",       type: "reel",     thumbnail: makePlaceholder(360, 640, "So1.png", 30) },
-      { id: 2, title: "Social",  type: "reel",     thumbnail: makePlaceholder(360, 640, "So2.png", 25) },
-      { id: 3, title: "Social",     type: "carousel", thumbnail: makePlaceholder(360, 640, "So3.png", 35) },
-      { id: 4, title: "Social", type: "reel",     thumbnail: makePlaceholder(360, 640, "So4.png", 20) },
-      { id: 5, title: "Social",           type: "reel",     thumbnail: makePlaceholder(360, 640, "So5.png", 38) },
-      { id: 6, title: "Social",              type: "carousel", thumbnail: makePlaceholder(360, 640, "So6.png", 32) },
-      { id: 7, title: "Social",             type: "reel",     thumbnail: makePlaceholder(360, 640, "So7.png", 15) },
+      { id: 1, title: "Resort Highlights Reel",       type: "reel",     thumbnail: makePlaceholder(360, 640, "Highlights Reel", 30) },
+      { id: 2, title: "Behind the Scenes — Kitchen",  type: "reel",     thumbnail: makePlaceholder(360, 640, "BTS Kitchen", 25) },
+      { id: 3, title: "Guest Experience Stories",     type: "carousel", thumbnail: makePlaceholder(360, 640, "Guest Stories", 35) },
+      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel",     thumbnail: makePlaceholder(360, 640, "Pool Vibes", 20) },
+      { id: 5, title: "Coffee Art Process",           type: "reel",     thumbnail: makePlaceholder(360, 640, "Coffee Art", 38) },
+      { id: 6, title: "New Menu Launch",              type: "carousel", thumbnail: makePlaceholder(360, 640, "Menu Launch", 32) },
+      { id: 7, title: "Sunset Timelapse",             type: "reel",     thumbnail: makePlaceholder(360, 640, "Sunset Lapse", 15) },
+      { id: 8, title: "Room Reveal — Suite Tour",     type: "reel",     thumbnail: makePlaceholder(360, 640, "Room Reveal", 28) }
       // ↑ เพิ่ม: { id: 9, title: "...", type: "reel", thumbnail: 'images/...' },
     ];
 
@@ -1167,7 +1174,7 @@
           <div className="about-grid">
             <ScrollReveal>
               <div className="about-portrait">
-                <img src={window.makePlaceholder(600, 800, 'Profile.jpg', 28)} alt="Chet Mutaphon" />
+                <img src={window.makePlaceholder(600, 800, 'portrait photo', 28)} alt="Chet Mutaphon" />
               </div>
             </ScrollReveal>
             <div>
@@ -1659,14 +1666,14 @@
           <main>
             <HeroSection />
             <AboutSection />
-            {/* <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
+            <WorksSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <PhotoSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <VideoSection tweaks={effectiveTweaks} />
             <FnbSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
-            {/* <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
+            <SalesSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
             <SocialSection tweaks={effectiveTweaks} />
-            {/* <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} /> */}
-            {/* <NewsletterSection /> */}
+            <DashboardSection tweaks={effectiveTweaks} onImageClick={openLightbox} />
+            <NewsletterSection />
             <ContactSection />
             <Footer />
           </main>
