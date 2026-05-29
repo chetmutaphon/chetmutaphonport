@@ -253,10 +253,9 @@
 
     var NAV_ITEMS = [
       { id: "home", label: "Home" }, { id: "about", label: "About" },
-      { id: "works", label: "Selected Works" }, { id: "photo", label: "Photo" },
+      { id: "photo", label: "Photo" },
       { id: "video", label: "Video" }, { id: "fnb", label: "F&B Promotions" },
-      { id: "sales", label: "Sales & Packages" }, { id: "social", label: "Social Content" },
-      { id: "dashboard", label: "Dashboard" }, { id: "newsletter", label: "Newsletter" },
+      { id: "social", label: "Social Content" },
       { id: "contact", label: "Contact" }
     ];
 
@@ -287,12 +286,11 @@
     ];
 
     var PHOTO_ITEMS = [
-      { id: 1, title: "Artwork I", category: "Editorial", img: makePlaceholder(600, 800, 'Photo 1', 220) },
-      { id: 2, title: "Artwork II", category: "Editorial", img: makePlaceholder(600, 800, 'Photo 2', 260) },
-      { id: 3, title: "Artwork III", category: "Editorial", img: makePlaceholder(600, 800, 'Photo 3', 35) },
-      { id: 4, title: "Artwork IV", category: "Editorial", img: makePlaceholder(600, 800, 'Photo 4', 160) },
-      { id: 5, title: "Artwork V", category: "Editorial", img: makePlaceholder(600, 800, 'Photo 5', 300) },
-      { id: 6, title: "Artwork VI", category: "Editorial", img: makePlaceholder(600, 800, 'Photo 6', 120) }
+      { id: 1, title: "Artwork I", category: "Editorial", img: "photo1.jpg" },
+      { id: 2, title: "Artwork II", category: "Editorial", img: "photo2.jpg" },
+      { id: 3, title: "Artwork III", category: "Editorial", img: "photo3.jpg" },
+      { id: 4, title: "Artwork IV", category: "Editorial", img: "photo4.jpg" },
+      { id: 5, title: "Artwork V", category: "Editorial", img: "photo5.jpg" }
     ];
 
     var VIDEO_ITEMS = [
@@ -305,12 +303,12 @@
     ];
 
     var FNB_ITEMS = [
-      { id: 1, title: "-", category: "-", img: makePlaceholder(600, 750, 'F&B Poster 1', 35) },
-      { id: 2, title: "-", category: "-", img: makePlaceholder(600, 750, 'F&B Poster 2', 160) },
-      { id: 3, title: "-", category: "-", img: makePlaceholder(600, 750, 'F&B Poster 3', 280) },
-      { id: 4, title: "-", category: "-", img: makePlaceholder(600, 750, 'F&B Poster 4', 220) },
-      { id: 5, title: "-", category: "-", img: makePlaceholder(600, 750, 'F&B Poster 5', 120) },
-      { id: 6, title: "-", category: "-", img: makePlaceholder(600, 750, 'F&B Poster 6', 300) }
+      { id: 1, title: "-", category: "-", img: "AW1.jpg" },
+      { id: 2, title: "-", category: "-", img: "AW2.jpg" },
+      { id: 3, title: "-", category: "-", img: "AW3.jpg" },
+      { id: 4, title: "-", category: "-", img: "AW4.jpg" },
+      { id: 5, title: "-", category: "-", img: "AW5.jpg" },
+      { id: 6, title: "-", category: "-", img: "AW6.jpg" }
     ];
 
     var SALES_ITEMS = [
@@ -325,13 +323,13 @@
     ];
 
     var SOCIAL_ITEMS = [
-      { id: 1, title: "Resort Highlights Reel", type: "reel", thumbnail: makePlaceholder(600, 600, 'Resort Reel', 220) },
-      { id: 2, title: "Behind the Scenes — Kitchen", type: "reel", thumbnail: makePlaceholder(600, 600, 'Kitchen BTS', 35) },
-      { id: 3, title: "Guest Experience Stories", type: "carousel", thumbnail: makePlaceholder(600, 600, 'Guest Stories', 160) },
-      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel", thumbnail: makePlaceholder(600, 600, 'Pool Vibes', 280) },
-      { id: 5, title: "Coffee Art Process", type: "reel", thumbnail: makePlaceholder(600, 600, 'Coffee Art', 30) },
-      { id: 6, title: "New Menu Launch", type: "carousel", thumbnail: makePlaceholder(600, 600, 'Menu Launch', 120) },
-      { id: 7, title: "Sunset Timelapse", type: "reel", thumbnail: makePlaceholder(600, 600, 'Sunset', 300) }
+      { id: 1, title: "Resort Highlights Reel", type: "reel", thumbnail: "So1.png" },
+      { id: 2, title: "Behind the Scenes — Kitchen", type: "reel", thumbnail: "So2.png" },
+      { id: 3, title: "Guest Experience Stories", type: "carousel", thumbnail: "So3.png" },
+      { id: 4, title: "Pool Vibes — Summer Campaign", type: "reel", thumbnail: "So4.png" },
+      { id: 5, title: "Coffee Art Process", type: "reel", thumbnail: "So5.png" },
+      { id: 6, title: "New Menu Launch", type: "carousel", thumbnail: "So6.png" },
+      { id: 7, title: "Sunset Timelapse", type: "reel", thumbnail: "So7.png" }
     ];
 
     var DASHBOARD_ITEMS = [
@@ -1558,14 +1556,10 @@ function App() {
       <main>
         <HeroSection />
         <AboutSection />
-        {/* <WorksSection onImageClick={openLightbox} /> */}
         <PhotoSection onImageClick={openLightbox} />
         <VideoSection />
         <FnbSection onImageClick={openLightbox} />
-        {/* <SalesSection onImageClick={openLightbox} /> */}
         <SocialSection onImageClick={openLightbox} />
-        {/* <DashboardSection onImageClick={openLightbox} /> */}
-        {/* <NewsletterSection onImageClick={openLightbox} /> */}
         <ContactSection />
       </main>
 
